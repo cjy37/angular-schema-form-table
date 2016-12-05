@@ -1,0 +1,6 @@
+<div sf-array="form" class="form-group-sm {{form.htmlClass}}" style="margin-bottom:15px"
+     ng-model="$$value$$" ng-model-options="form.ngModelOptions">
+  <div style="padding-right:0;width:100%" class="{{form.fieldHtmlClass}}" ng-model="modelArray">
+    <sf-decorator ng-repeat="tmpform in form.items" ng-init="tmpform.notitle = true" class="{{tmpform.htmlClass}}" form="tmpform"></sf-decorator>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <br/>
+  <a ng-if="form.options.showThumb" href="{{$$value$$}}" target="_blank">
+    <img ng-if="form.options.showThumb" ngf-src="$$value$$"
+         height="{{form.options.thumbSize}}"
+         width="{{form.options.thumbSize}}" style="margin-bottom: 10px" class="thumb"/>
+  </a>
+  <br/>
+  <a class="btn btn-success" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex, $newFiles, $duplicateFiles, $invalidFiles, $event)"
+          ngf-accept="'image/*'"
+          ngf-fix-orientation="true" ngf-capture="'camera'" ngf-validate="form.options.uploadvalidate"
+          ngf-resize="{width: (form.options.resizewidth?form.options.resizewidth:960), quality: 0.8, type: 'image/jpeg'}"
+          ngf-resize-if="$width > (form.options.resizewidth?form.options.resizewidth:960) || $height > (form.options.resizewidth?form.options.resizewidth:960)" ng-class="form.class" tabindex="-1">
+    <span ng-if="!$file[form.options.resultKey]">上传图片</span>
+    <span class="file-progress" ng-if="!$file[form.options.resultKey]"
+          ng-show="$file[form.options.progressKey] >= 0">
+      <span style="width:{{$file[form.options.progressKey]}}%"
+            ng-bind="$file[form.options.progressKey] + '%'"> </span>
+    </span>
+    <span ng-show="$file[form.options.resultKey]">上传成功</span>
+  </a>
+  <br ng-if="form.options.suggestBottom" />
+  <span ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span>
+  <span ng-if="$file[form.options.errorMsgKey]" class="sr-only">错误: {{$file[form.options.errorMsgKey]}}</span>
+  <div class="help-block" sf-message="form.description"></div>
+</div>

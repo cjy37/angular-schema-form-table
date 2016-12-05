@@ -1,0 +1,44 @@
+<div class="form-group {{form.htmlClass}}">
+  <label class="control-label" ng-bind-html="form.title + '：'"></label>
+  <div class="list-group-item">
+    <span ng-bind-html="JSON.stringify($$value$$)"></span>
+    <div class="form-group {{form.fieldHtmlClass}} schema-form-string" ng-repeat="item in $$value$$" ng-model="$$value$$">
+      <span ng-if="item.isRequire" style="color: red;">*&nbsp;</span><label class="control-label" ng-bind-html="item.sciTitle + '：'"></label>
+      <input ng-if="item.sciType && item.sciType.value == 0" ng-disabled="form.readonly" class="form-control" type="string" ng-model="item.srciValue">
+      <select ng-if="item.sciType && item.sciType.value == 1"
+              ng-model="item.srciValue"
+              ng-model-options="form.ngModelOptions"
+              sf-changed="form"
+              ng-disabled="form.readonly"
+              class="form-control  ng-valid-schema-form ng-touched"
+              schema-validate="form" name="noenum{{$index}}"
+              ng-options="option.scoiNum as option.name  for option in item.options" >
+      </select>
+      <div ng-if="item.sciType && item.sciType.value == 2">
+        <div class="radio" ng-repeat="option in item.options">
+          <label>
+            <input type="radio" class="" sf-changed="form" ng-disabled="form.readonly" ng-model="item.srciValue"
+                   ng-value="option.scoiNum" name="radios{{option.sciId}}">
+            <span ng-bind-html="option.name" class="ng-binding"></span>
+          </label>
+        </div>
+      </div>
+      <div ng-if="item.sciType && item.sciType.value == 3">
+        <div class="checkbox" ng-repeat="option in item.options track by $index">
+          <label>
+            <input type="checkbox"
+              ng-disabled="form.readonly"
+              sf-changed="form"
+              ng-true-value="true" ng-false-value="false"
+              class="ng-dirty ng-valid-parse ng-touched"
+              ng-value="option.scoiNum"
+              name="checkbox{{option.sciId}}"
+              ng-model="option.srciValue" >
+            <span ng-bind-html="option.name" class="ng-binding">a</span>
+          </label>
+        </div>
+      </div>
+      <textarea ng-if="item.sciType && item.sciType.value == 4" ng-disabled="form.readonly"  ng-model="item.srciValue" class="form-control"></textarea>
+    </div>
+  </div>
+</div>

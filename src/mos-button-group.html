@@ -1,0 +1,10 @@
+<div class="btn-group" ng-model="$$value$$" >
+  <button type="button" class="btn btn-default dropdown-toggle {{form.htmlClass}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{form.title}} <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li ng-repeat="item in form.actions" role="{{item.title}}" class="{{item.title!='separator' ? '' : 'divider'}}">
+      <a href="#." ng-click="item.onClick($event)" ng-hide="item.title=='separator'">{{item.title}}</a>
+    </li>
+  </ul>
+</div>

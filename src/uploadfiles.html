@@ -1,0 +1,21 @@
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <br/>
+  <div ng-repeat="f in $$value$$ track by $index">
+    <span ng-if="$files[$index][form.options.errorMsgKey]" class="sr-only">错误: {{$files[$index][form.options.errorMsgKey]}}</span>
+    <a ng-if="form.options.showThumb" href="{{f}}" target="_blank">{{f.substring(f.lastIndexOf('/')+1)}}</a>
+    <span class="file-progress" ng-show="$files[$index][form.options.progressKey] >= 0">
+        <div style="width:{{$files[$index][form.options.progressKey]}}%" ng-bind="$files[$index][form.options.progressKey] + '%'"></div>
+    </span>
+    <div ng-show="f" class="glyphicon glyphicon-remove-sign file-del"
+         ng-click="form.options.deleteFn($$value$$, f)"></div>
+  </div>
+  <a ngf-multiple="true" class="btn btn-success" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$)"
+          ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate?form.options.uploadvalidate:{size: {max: '20MB', min: '10B'}}" ng-class="form.class" tabindex="-1">
+    <span>批量上传</span>
+  </a>
+  <br ng-if="form.options.suggestBottom" />
+  <span ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span>
+  <div class="help-block" sf-message="form.description"></div>
+</div>

@@ -1,0 +1,412 @@
+<style>
+  .popover{
+    min-width: 900px;
+    width: 900px;
+  }
+  .title-btn {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    padding: 7px 9px !important;
+    border-radius: 100px !important;
+  }
+  .popover-inner{
+    position: relative;
+  }
+</style>
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <!--<br/>-->
+  <input ng-if="!form.fieldAddonLeft &amp;&amp; !form.fieldAddonRight"
+         ng-show="form.key &amp;&amp; form.type!='label'"
+         type="string"
+         step="any" sf-changed="form"
+         placeholder="{{form.placeholder}}"
+         class="form-control ng-dirty" id="publisherId"
+         ng-model-options="form.ngModelOptions"
+         ng-model="model[form.key]"
+
+         uib-popover-template="'popoverTemplate.html'"
+         popover-title="{{form.option.title}}"
+         popover-placement="{{form.option.placement}}"
+         popover-trigger="none"
+         popover-is-open="form.popoverIsOpen"
+         ng-click="form.popoverIsOpen=!form.popoverIsOpen"
+
+         ng-init="editmodel.assignfield=form.assignfield"
+
+         style="background-color: white;"
+         readonly="readonly"
+         schema-validate="form" name="aniTitle" aria-describedby="aniTitleStatus" style="">
+</div>
+<!--popover-->
+<script type="text/ng-template" id="popoverTemplate.html">
+  <div ng-controller="popoverCtrl" id="popoverCtrl" onkeydown="stopEnterEvent(event)" onkeyup="stopEnterEvent(event)" onkeypress="stopEnterEvent(event)">
+    <button type="button" class="circular ui icon button title-btn" ng-click="form.popoverIsOpen=false">
+      <i class="fa fa-close"></i>
+    </button>
+    <div sf-schema="popoverschema" sf-form="popoverform" sf-model="model" ng-init="initParams(form)" sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+  </div>
+</script>
+<script>
+  function popoverCtrl($scope, $http, Upload, $sce, $timeout) {
+    $scope.model = {search_key_type: [], selected: {}};
+    console.log("初始化idname" + JSON.stringify($scope.$parent.model) + "---------\n" + $scope.$parent.model[$scope.$parent.editmodel.assignfield.id]);
+    $scope.model.selected.id = $scope.$parent.model[$scope.$parent.editmodel.assignfield.id] ? ($scope.$parent.model[$scope.$parent.editmodel.assignfield.id]+"").split(",") : [];
+    $scope.model.selected.name = $scope.$parent.model[$scope.$parent.editmodel.assignfield.name] ? $scope.$parent.model[$scope.$parent.editmodel.assignfield.name].split(",") : [];
+    $scope.model.selected.No = $scope.$parent.model[$scope.$parent.editmodel.assignfield.No] ? ($scope.$parent.model[$scope.$parent.editmodel.assignfield.No]+"").split(",") : [];
+    $scope.model.selected.phone = $scope.$parent.model[$scope.$parent.editmodel.assignfield.phone] ? ($scope.$parent.model[$scope.$parent.editmodel.assignfield.phone]+"").split(",") : [];
+    $scope.model.selected.uoiId = $scope.$parent.model[$scope.$parent.editmodel.assignfield.uoiId] ? ($scope.$parent.model[$scope.$parent.editmodel.assignfield.uoiId]+"").split(",") : [];
+    $scope.model.selected.uuiGrade = $scope.$parent.model[$scope.$parent.editmodel.assignfield.uuiGrade] ? ($scope.$parent.model[$scope.$parent.editmodel.assignfield.uuiGrade]+"").split(",") : [];
+
+    $scope.initParams =function(form){
+      $scope.model.multiselect=form.multiselect;
+      $scope.model.queryBy=form.option.queryBy;
+      $scope.model.criteria=form.option.criteria;
+    }
+    $scope.search_postdata = $.extend(GetUrlParsFun(), $scope.model);
+    $scope.popoverschema = {
+      type: "object",
+      title: "Comment",
+      properties: {
+        search_key_name: {"type": "string"}
+      },
+      required: []
+    };
+    $scope.popoverform = [
+      {
+        type: "section",
+        items: [
+          {
+            key: "search_key_name",
+            htmlClass: "pull-left col-xs-6 col-sm-4 col-md-3 col-lg-2 no-padding-type",// form-group-sm",
+            fieldHtmlClass: "ht-addon-left",
+            type: 'text',
+            notitle: true,
+            placeholder: "输入关键字..."
+          },
+          {
+            type: 'button',
+            htmlClass: "pull-left btn-margin-right",
+            icon: "glyphicon glyphicon-search",
+            style: "btn-info ht-addon-right",
+            title: '搜索',
+            onClick: function () {
+              $scope.search_postdata['offset'] = 0;
+              $('#popover_tbl_datapage_list').bootstrapTable('selectPage', 1);
+            }
+          }
+        ]
+      },
+      {
+        type: "template",
+        template: '<table id="popover_tbl_datapage_list" ng-init="form.foo()"></table>',
+        name: 'popover_tbl_datapage_list',
+        foo: function () {
+          $('#popover_tbl_datapage_list').bootstrapTable({
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+            url: '/api/universityuserinfo/getList',
+            cache: false,
+            responseHandler: function (res) {
+              console.log("用户数据：" + JSON.stringify(res));
+              return {
+                rows: (res && res.data && res.data.queryData && res.data.queryData.length > 0) ? res.data.queryData : [],
+                total: (res && res.data && res.data.totalCnt) ? res.data.totalCnt : 0,
+                pageNumber: (res && res.data && res.data.page) ? res.data.page : 1
+              };
+            },
+            queryParams: function (p) {
+              $scope.search_postdata["limit"] = _.parseInt(p['limit']);
+              $scope.search_postdata["is_page"] = 1;
+              $scope.search_postdata.search_key_name = $scope.model.search_key_name;
+              var search_postdata = angular.copy($scope.search_postdata);
+              console.log("搜索参数：" + JSON.stringify(search_postdata) + JSON.stringify($scope.model));
+              if (_.isUndefined(search_postdata.offset))
+                search_postdata['offset'] = p['offset'];
+              else
+                delete $scope.search_postdata.offset;
+              $scope.search_postdata['page'] = _.parseInt(_.parseInt(search_postdata['offset']) / _.parseInt(search_postdata['limit'])) + 1;
+              search_postdata['page'] = $scope.search_postdata['page'];
+              ArrayObjectToIntData(search_postdata);
+              console.log(JSON.stringify($scope.$parent.model));
+              if($scope.$parent.model && $scope.$parent.model.abiId && ($scope.$parent.model.abiId.id || $scope.$parent.model.abiId.id ==0)
+                && $scope.model.queryBy == "abiId"){
+                search_postdata.abiId = $scope.$parent.model.abiId.id;
+              }
+              if($scope.model.criteria){
+                _.extend(search_postdata, $scope.model.criteria);
+              }
+              return search_postdata;
+            },
+            striped: true,
+            pagination: true,
+            sortName: 'sortno',
+            sortOrder: 'desc',
+            pageSize: 5,
+            locale: 'zh-CN',
+            search: false,
+            clickToSelect: true,
+            onCheck: function (row) {
+              var uoiId = row.uoiId ? row.uoiId.id : ""
+              $scope.btnSelectUser(row.id, row.uuiName, row.gradeCode, row.uuiMobile || row.loginName, uoiId, row.uuiGrade);
+            },
+            onUncheck: function (row) {
+              var uoiId = row.uoiId ? row.uoiId.id : ""
+              $scope.btnSelectUser(row.id, row.uuiName, row.gradeCode, row.uuiMobile || row.loginName, uoiId, row.uuiGrade);
+            },
+            onCheckAll: function (rows) {
+              return false;
+            },
+            onUncheckAll: function (rows) {
+              return false;
+            },
+            queryParamsType: 'limit',
+            sidePagination: "server",
+            smartDisplay: true,
+            checkboxHeader: false,
+            undefinedText: '-',
+            searchOnEnterKey: false,
+            minimumCountColumns: 1000,
+            selectItemName: "选择",
+            columns: [
+              {
+                radio: true,
+                align: 'center',
+                valign: 'top',
+                title: "选择",
+                visible: !$scope.model.multiselect ? true : false,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  if ($.inArray(row.id+"", $scope.model.selected.id) > -1) {
+                    return {checked: true}
+                  }
+                  return value;
+                }
+              },
+              {
+                checkbox: true,
+                align: 'center',
+                valign: 'top',
+                title: "选择",
+                visible: $scope.model.multiselect ? true : false,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  if ($scope.model.multiselect && $.inArray(row.id+"", $scope.model.selected.id) > -1) {
+                    return {checked: true}
+                  }
+                  return value;
+                }
+              },
+              {
+                field: 'uuiNum',
+                title: '序号',
+                align: 'center',
+                valign: 'top',
+                visible: true,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  return _.toString((_.parseInt($scope.search_postdata['page']) - 1) * _.parseInt($scope.search_postdata['limit']) + 1 + index);
+                }
+              },
+              {
+                field: 'uoiId',
+                title: '隶属院系',
+                align: 'center',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  if (!_.isUndefined(value) && _.isObject(row["uoiId"])) {
+                    return row["uoiId"].fullName;
+                  }
+                  return "&nbsp;";
+                }
+              },
+              /*{
+                field: 'uuiGrade',
+                title: '年级',
+                align: 'left',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class'
+              },*/
+              {
+                field: 'uuiName',
+                title: '姓名',
+                align: 'left',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class'
+              },
+              {
+                field: 'gradeCode',
+                title: '学号',
+                align: 'left',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class'
+              },
+              {
+                field: 'uuiMobile',
+                title: '手机号',
+                align: 'left',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class'
+              },
+              {
+                field: 'uuiIdcard',
+                title: '身份证号码',
+                align: 'left',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class'
+              },
+              {
+                field: 'uuiSex',
+                title: '性别',
+                align: 'center',
+                valign: 'top',
+                sortable: false,
+                visible: true,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  if (value == 0 ) {
+                    return "女";
+                  } else if(value == 1){
+                    return "男";
+                  }
+                  return "&nbsp;";
+                }
+              },
+              {
+                field: 'uuiType',
+                title: '用户类型',
+                align: 'center',
+                valign: 'top',
+                sortable: true,
+                visible: true,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  if (value == 0 ) {
+                    return "默认用户";
+                  } else if(value == 1){
+                    return "老师";
+                  } else if(value == 2){
+                    return "学生";
+                  }
+                  return "&nbsp;";
+                }
+              },
+              /*{
+                title: '是否选取',
+                align: 'center',
+                valign: 'middle',
+                visible: true,
+                class: 'column_class',
+                formatter: function (value, row, index) {
+                  console.log("格式化"+JSON.stringify(row.uoiId) + row.uoiId + "\n" + JSON.stringify($scope.model.selected));
+                  var uoiId = row.uoiId ? row.uoiId.id : ""
+                  if ($.inArray(row.id+"", $scope.model.selected.id) > -1) {
+                    return '<a href="javascript:void(0)" class="flag_' + row.id +'" onclick="btnSelectUser(this, ' + row.id
+                      + ',\'' + row.uuiName + '\',\'' + row.gradeCode + '\',\'' + row.uuiMobile + '\',\'' + uoiId
+                      + '\',\'' + row.uuiGrade + '\')">取消</a>';
+                  }
+                  return '<a href="javascript:void(0)" class="flag_' + row.id +'" onclick="btnSelectUser(this, ' + row.id
+                    + ',\'' + row.uuiName + '\',\'' + row.gradeCode + '\',\'' + row.uuiMobile + '\',\'' + uoiId
+                    + '\',\'' + row.uuiGrade + '\')">选取</a>';
+                }
+              }*/
+            ]
+          });
+          $(window).resize(function () {
+            $('#popover_tbl_datapage_list').bootstrapTable('resetView');
+          });
+        }
+      }
+    ];
+    /*
+     * 数组删除某元素
+     * */
+    Array.prototype.remove = function (index) {
+      for (var i = 0; i < this.length; i++) {
+        if (i == index) {
+          this.splice(i, 1);
+          break;
+          console.log("删除元素" + obj + "数组" + this);
+        }
+      }
+    }
+    //选择用户
+    $scope.btnSelectUser = function (id, name, No, phone, uoiId, uuiGrade) {
+      console.log("选择用户\n" + "uoiId" + JSON.stringify(uoiId));
+      var isSelected = false;
+      var arrIndex = $.inArray(id+"", $scope.model.selected.id);
+      if(!$scope.model.multiselect && $scope.model.selected.id == id)
+        return;
+      if(arrIndex > -1){
+        $scope.model.selected.id.remove(arrIndex);
+        $scope.model.selected.name.remove(arrIndex);
+        $scope.model.selected.No.remove(arrIndex);
+        $scope.model.selected.phone.remove(arrIndex);
+        $scope.model.selected.uoiId.remove(arrIndex);
+        $scope.model.selected.uuiGrade.remove(arrIndex);
+//        $(opt).html("选取");
+      } else {
+        if($scope.model.selected.id.length > 0 && !$scope.model.multiselect){
+          var tmpIndex = $.inArray($scope.$parent.model[$scope.$parent.editmodel.assignfield.id]+"", $scope.model.selected.id);
+//          $(".flag_" + $scope.$parent.model[$scope.$parent.editmodel.assignfield.id]).html("选取");
+          $scope.model.selected.id.remove(tmpIndex);
+          $scope.model.selected.name.remove(tmpIndex);
+          $scope.model.selected.No.remove(tmpIndex);
+          $scope.model.selected.phone.remove(tmpIndex);
+          $scope.model.selected.uoiId.remove(tmpIndex);
+          $scope.model.selected.uuiGrade.remove(tmpIndex);
+        }
+        $scope.model.selected.id.push(id+"");
+        $scope.model.selected.name.push(name);
+        $scope.model.selected.No.push(No);
+        $scope.model.selected.phone.push(phone);
+        $scope.model.selected.uoiId.push(uoiId);
+        $scope.model.selected.uuiGrade.push(uuiGrade);
+//        $(opt).html("取消");
+      }
+//      console.log($scope.model.multiselect+"\n\n");
+//      if($scope.$parent.model[$scope.$parent.editmodel.assignfield.id] == id)
+//        $(opt).html("取消");
+//        return;
+//      if($scope.$parent.model[$scope.$parent.editmodel.assignfield.id]){
+//        $(".flag_" + $scope.$parent.model[$scope.$parent.editmodel.assignfield.id]).html("选取");
+//      }
+//      $(opt).html("取消");
+      $timeout(function () {
+        if ($scope.$parent.editmodel.assignfield.id)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.id] = $scope.model.selected.id.toString();
+        if ($scope.$parent.editmodel.assignfield.name)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.name] = $scope.model.selected.name.toString();
+        if ($scope.$parent.editmodel.assignfield.No)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.No] = $scope.model.selected.No.toString();
+        if ($scope.$parent.editmodel.assignfield.phone)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.phone] = $scope.model.selected.phone.toString();
+        if ($scope.$parent.editmodel.assignfield.uoiId)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.uoiId] = $scope.model.selected.uoiId.toString();
+        if ($scope.$parent.editmodel.assignfield.uuiGrade)
+          $scope.$parent.model[$scope.$parent.editmodel.assignfield.uuiGrade] = $scope.model.selected.uuiGrade.toString();
+        console.log("用户信息" + JSON.stringify($scope.$parent.model) + id + "--" + name + "--" + No + "--" + phone + "--" + uoiId + "--" + uuiGrade);
+      });
+    }
+  }
+  //绑定选取用户方法
+  function btnSelectUser(opt, id, uuiName, gradeCode, uuiMobile, uoiId, uuiGrade) {
+    var tmpFn = GetAngularFun('#popoverCtrl', 'btnSelectUser');
+    tmpFn(opt, id, uuiName, gradeCode, uuiMobile, uoiId, uuiGrade);
+  }
+</script>

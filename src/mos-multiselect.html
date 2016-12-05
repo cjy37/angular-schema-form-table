@@ -1,0 +1,16 @@
+<div class="form-group {{form.htmlClass}} schema-form-select"
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
+  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
+  <!--ng-model="$$value$$"-->
+  <!--schema-validate="form"-->
+  <div ng-dropdown-multiselect=""
+       class="{{form.controlHtmlClass}}"
+       ng-model-options="form.ngModelOptions"
+       options="form.titleMap"
+       ng-disabled="{{form.readonly}}"
+       selected-model="$$value$$"
+       translation-texts="form.selectText"
+       group-by="{{form.groupField}}"
+       extra-settings="form.map"></div>
+  <div class="help-block" sf-message="form.description"></div>
+</div>

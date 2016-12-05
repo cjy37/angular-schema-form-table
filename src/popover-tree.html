@@ -1,0 +1,24 @@
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <br />
+  <div class="btn-group">
+    <button type="button" class="btn btn-default" ng-click="form.open('sm', $$value$$, form)">{{form.name}}</button>
+  </div>
+  <span ng-if="hasError() || hasSuccess()"
+        id="{{form.key.slice(-1)[0] + 'Status'}}"
+        class="sr-only">{{ hasSuccess() ? '(success)' : '(error)' }}</span>
+  <script type="text/ng-template" id="tree.html">
+    <div class="modal-header">
+      <h3 class="modal-title" ng-bind-html="form.title"></h3>
+    </div>
+    <div class="modal-body">
+      <div class="help-block" sf-message="form.description"></div>
+      <div js-tree="form.options" ng-model="items" should-apply="form.ignoreModelChanges()"
+           tree="form.treeInstance" tree-events-obj="form.treeEventsObj"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
+</div>

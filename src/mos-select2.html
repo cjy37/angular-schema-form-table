@@ -1,0 +1,19 @@
+<!--http://dotansimha.github.io/angularjs-dropdown-multiselect/#/-->
+<div class="form-group {{form.htmlClass}} schema-form-select"
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
+  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
+  <ui-select ng-model="$$value$$" theme="bootstrap"
+             ng-disabled="{{form.readonly}}"
+             reset-search-input="false"
+             class="{{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">
+    <ui-select-match placeholder="{{form.placeholder}}">{{$select.selected[form.map.displayProp]}}</ui-select-match>
+    <ui-select-choices repeat="tmpitem in form.titleMap track by $index"
+                       refresh="form.refreshData($select.search, form)"
+                       refresh-delay="500">
+      <div ng-bind-html="tmpitem[form.map.displayProp] | highlight: $select.search"></div>
+      <small ng-if="form.map.moreitemname1">{{tmpitem[form.map.moreitemname1]}}<span ng-if="form.map.moreitemname2">{{tmpitem[form.map.moreitemname2]}}</span>
+      </small>
+    </ui-select-choices>
+  </ui-select>
+  <div class="help-block" sf-message="form.description"></div>
+</div>
