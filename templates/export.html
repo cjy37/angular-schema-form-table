@@ -1,0 +1,72 @@
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+    $scope.param = $stateParams;
+    //console.log(JSON.stringify($stateParams));
+    $scope.links = [{name: "aa", url: "#/aa"}, {name: "bb", url: "#/bb"}];
+
+    $scope.exportAction = function(){
+      switch($scope.export_action){
+        case 'pdf': $scope.$broadcast('export-pdf', {});
+          break;
+        case 'excel': $scope.$broadcast('export-excel', {});
+          break;
+        case 'doc': $scope.$broadcast('export-doc', {});
+          break;
+        default: console.log('no event caught');
+      }
+    }
+  }
+
+
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+
+  <div class="form-group">
+    <button ng-click="export_action='pdf';exportAction()" class="btn">PDF</button>
+    <button ng-click="export_action='excel';exportAction()" class="btn">excel</button>
+    <button ng-click="export_action='doc';exportAction()" class="btn">word</button>
+  </div>
+  <table id="customers" class="table table-striped export-table">
+    <thead>
+    <tr class='warning'>
+      <th>Country</th>
+      <th>Population</th>
+      <th>Date</th>
+      <th>%ge</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Chinna</td>
+      <td>1,363,480,000</td>
+      <td>March 24, 2014</td>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>1,241,900,000</td>
+      <td>March 24, 2014</td>
+      <td>17.4</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>317,746,000</td>
+      <td>March 24, 2014</td>
+      <td>4.44</td>
+    </tr>
+    <tr>
+      <td>Indonesia</td>
+      <td>249,866,000</td>
+      <td>July 1, 2013</td>
+      <td>3.49</td>
+    </tr>
+    <tr>
+      <td>Brazil</td>
+      <td>201,032,714</td>
+      <td>July 1, 2013</td>
+      <td>2.81</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

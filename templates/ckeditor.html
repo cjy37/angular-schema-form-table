@@ -1,0 +1,61 @@
+
+
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+  <div sf-schema="schema" sf-form="form" sf-model="model" sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+  <div>{{prettyModel}}</div>
+</div>
+
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+    $scope.param = $stateParams;
+    $scope.schema = {
+      type: 'object',
+      title: 'Upload',
+      properties: {
+        name: {
+          title: '姓名',
+          type: 'string'
+        },
+        content: {
+          title: '内容编辑',
+          type: 'string'
+        }
+      }
+    };
+
+    $scope.model = {
+      name : '',
+      content : 'abc'
+    };
+
+
+    $scope.form = [
+      'name',
+      {
+        key: 'content',//字段
+        options: {
+          language : 'zh-cn',
+          allowedContent : true,
+          entities : false,
+          filebrowserImageUploadUrl: CtrlEnum.ckeditor.filebrowserImageUploadUrl,
+          toolbar : CtrlEnum.ckeditor.toolBar//CtrlEnum.ckeditor.basicToolBar//
+        },
+        onReady: function(){
+          console.log('editor ready!');
+        },
+        //templateUrl: "/templates/ckeditor.html",
+        type: "ckeditor"
+      }
+    ];
+
+    $scope.$watch('model', function(value){
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+
+</script>
+

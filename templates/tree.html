@@ -1,0 +1,237 @@
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+  <!--<span class="info">{{error}}</span>-->
+  <!--<form name="ngform" ng-submit="submitForm(ngform)">-->
+  <div sf-schema="schema" sf-form="form" sf-model="model" sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+  <!--</form>-->
+
+
+  <div>{{prettyModel}}</div>
+</div>
+
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+    $scope.param = $stateParams;
+    $scope.schema = {
+      type: 'object',
+      title: 'Tree',
+      properties: {
+        name: {
+          title: '姓名',
+          type: 'string'
+        },
+        tree: {
+          title: '分类',
+          type: 'object'
+        }
+      }
+    };
+
+
+    $scope.model = {
+      name : '',
+      tree : [ {
+        "id" : "1",
+        "parent" : "#",
+        "text" : "node1",
+        "state" : {"opened" : true}
+      }, {
+        "id" : "2",
+        "parent" : "#",
+        "text" : "node2",
+        "state" : {"opened" : true}
+      }, {
+        "id" : "3",
+        "parent" : "2",
+        "text" : "node3",
+        "state" : {"opened" : true}
+      }, {
+        "id" : "4",
+        "parent" : "2",
+        "text" : "node4",
+        "state" : {"opened" : true}
+      }]
+    };
+
+    $scope.treeForm = {
+      "key": 'tree',
+      'name': "选择分类",
+      'description': '请选择分类，选择后不能修改！哈哈哈。。。',
+      treeInstance: null,
+      options: {
+        core : {//配置
+          multiple : true,//是否多选
+          animation : true,
+          error : function (error) {
+            console.log('treeCtrl: error from js tree - ' + angular.toJson(error));
+          },
+          check_callback : true,
+          worker : true
+        },
+        "checkbox" : {//复选框设置
+          'three_state': false//不级联， 默认为true
+        },
+        "conditionalselect" : function (node, event) {//是否可以选中设置
+          return true;//node.parent != '#';//不让选?
+        },
+        plugins : [ 'checkbox', 'conditionalselect',  'wholerow', 'changed' ],//插件列表
+        version : 1
+      },
+      ignoreModelChanges: function () {
+        console.log('ignoreModelChanges called');
+        return true;
+      },
+      treeEventsObj: {//事件配置
+        'ready' : function () {//初始化完成事件
+          console.log('ready called');
+        },
+        'create_node' : function (e, item) {//增加节点事件
+          console.log('create_node called');
+        },
+        'changed.jstree' : function (e, data) {//改变选中项事件
+          var items = $scope.model.tree;
+          $scope.$apply(function () {
+            angular.forEach(items, function (item) {
+              var tmpSelected = false;
+              angular.forEach(data.selected, function (id) {
+                if (item.id == id)
+                  tmpSelected = true;
+              });
+              item.state.selected = tmpSelected;
+            });
+            //$scope.treeForm.options.version++;
+          });
+          console.log(data.selected);//console.log(data.changed.selected); // newly selected
+          //console.log(data.changed.deselected); // newly deselected
+        }
+      },
+      //templateUrl: "/templates/popoverTree.html",
+      type: "ngtree"//"popover-tree"//树形选择列表组件类型
+    };
+
+    $scope.treeForm2 = {
+      "key": 'tree',
+      'name': "选择分类",
+      'description': '请选择分类，选择后不能修改！哈哈哈。。。',
+      treeInstance: null,
+      options: {
+        core : {//配置
+          multiple : true,//是否多选
+          animation : true,
+          error : function (error) {
+            console.log('treeCtrl: error from js tree - ' + angular.toJson(error));
+          },
+          check_callback : true,
+          worker : true
+        },
+        "checkbox" : {//复选框设置
+          'three_state': false//不级联， 默认为true
+        },
+        "conditionalselect" : function (node, event) {//是否可以选中设置
+          return true;//node.parent != '#';//不让选?
+        },
+        plugins : [ 'checkbox', 'conditionalselect',  'wholerow', 'changed' ],//插件列表
+        version : 1
+      },
+      ignoreModelChanges: function () {
+        console.log('ignoreModelChanges called');
+        return true;
+      },
+      treeEventsObj: {//事件配置
+        'ready' : function () {//初始化完成事件
+          console.log('ready called');
+        },
+        'create_node' : function (e, item) {//增加节点事件
+          console.log('create_node called');
+        },
+        'changed.jstree' : function (e, data) {//改变选中项事件
+//          var items = $scope.model.tree;
+//          $scope.$apply(function () {
+//            angular.forEach(items, function (item) {
+//              var tmpSelected = false;
+//              angular.forEach(data.selected, function (id) {
+//                if (item.id == id)
+//                  tmpSelected = true;
+//              });
+//              item.state.selected = tmpSelected;
+//            });
+//            //$scope.treeForm.options.version++;
+//          });
+          console.log(data.selected);//console.log(data.changed.selected); // newly selected
+          //console.log(data.changed.deselected); // newly deselected
+        }
+      },
+      open: function (size, items, form) {
+
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'tree.html',
+          controller: 'ModalInstanceCtrl',
+          size: size,
+          resolve: {
+            items: function () {
+              return items
+            },
+            form: function () {
+              return form
+            }
+          }
+        });
+
+        modalInstance.result.then(function (tmpitems) {
+          console.log('Modal closed at: ' + new Date());
+          var ref = $(form.treeInstance[0]).jstree(true);
+          var sel = ref.get_selected(false);//true : return object array; false: return id array
+          angular.forEach(items, function (item) {
+            var tmpSelected = false;
+            angular.forEach(sel, function (id) {
+              if (item.id == id)
+                tmpSelected = true;
+            });
+            item.state.selected = tmpSelected;
+          });
+          $scope.treeForm.options.version++;
+          console.log(sel);
+        }, function () {
+          console.log('Modal dismissed at: ' + new Date());
+        });
+      },
+      //templateUrl: "/templates/popoverTree.html",
+      type: "popover-tree"//树形选择列表组件类型
+    };
+
+    $scope.form = [
+      'name',
+      $scope.treeForm,
+      $scope.treeForm2,
+      {
+        type: 'actions',
+        fieldHtmlClass: 'btn-success',
+        items: [
+          {
+            type: 'button',
+            title: 'Get Tree Selected',
+            onClick: function () {
+
+              $scope.model.tree[1].state = {"opened" : true, selected: true};
+              $scope.model.tree[0].state["selected"] = true;
+
+              var ref = $($scope.treeForm.treeInstance[0]).jstree(true);
+              var sel = ref.get_selected(false);//true : return object array; false: return id array
+              console.log(sel);
+            }
+          }
+        ]
+      }
+    ];
+
+    $scope.$watch('model', function(value){
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+
+</script>
+

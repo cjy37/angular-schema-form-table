@@ -1,0 +1,400 @@
+<style>
+  div[dnd-list] > li {
+    position: relative;
+  }
+  body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }
+
+  .box {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  }
+
+  .box > h3 {
+    color: #333;
+    border-color: #ddd;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-repeat: repeat-x;
+    display: block;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .box-padding {
+    padding: 15px;
+  }
+
+  .box-padding > h3 {
+    margin: -15px;
+    margin-bottom: 15px;
+  }
+
+  .box-grey {
+    border-color: #ddd;
+  }
+
+  .box-grey > h3 {
+    background-color: #f5f5f5;
+    background-image: -webkit-linear-gradient(top,#f5f5f5 0,#e8e8e8 100%);
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+  }
+
+  .box-blue {
+    border-color: #bce8f1;
+  }
+
+  .box-blue > h3 {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    background-image: -webkit-linear-gradient(top,#d9edf7 0,#c4e3f3 100%);
+    background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);
+  }
+
+  .box-black {
+    border-color: #000000;
+  }
+
+  .box-black > h3 {
+    color: #ffffff;
+    background-color: #5b5b5b;
+    border-color: #000000;
+    background-image: -webkit-linear-gradient(top,#5b5b5b 0, #000000 100%);
+    background-image: linear-gradient(to bottom,#5b5b5b 0, #000000 100%);
+  }
+
+  .ui.grid>.row_li {
+    padding: 0;
+    /*margin: 0 10px;*/
+  }
+
+  .edit-panel .form-group{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  p {
+    line-height: initial;
+  }
+  /***************************** Required styles *****************************/
+
+  /**
+   * For the correct positioning of the placeholder element, the dnd-list and
+   * it's children must have position: relative
+   */
+  div[dnd-list] > li {
+    position: relative;
+  }
+
+  /***************************** Dropzone Styling *****************************/
+
+  /**
+   * The dnd-list should always have a min-height,
+   * otherwise you can't drop to it once it's empty
+   */
+  div[dnd-list] {
+    min-height: 42px;
+    margin: 0px;
+    padding-left: 0px;
+  }
+
+  /**
+   * The dnd-lists's child elements currently MUST have
+   * position: relative. Otherwise we can not determine
+   * whether the mouse pointer is in the upper or lower
+   * half of the element we are dragging over. In other
+   * browsers we can use event.offsetY for this.
+   */
+  .dropzone li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: block;
+    padding: 0px;
+  }
+
+  /**
+   * Reduce opacity of elements during the drag operation. This allows the user
+   * to see where he is dropping his element, even if the element is huge. The
+   * .dndDragging class is automatically set during the drag operation.
+   */
+  .dropzone .dndDragging {
+    opacity: 0.7;
+  }
+
+  /**
+   * The dndDraggingSource class will be applied to the source element of a drag
+   * operation. It makes sense to hide it to give the user the feeling that he's
+   * actually moving it. Note that the source element has also .dndDragging class.
+   */
+  .dropzone .dndDraggingSource {
+    display: none;
+  }
+
+  /**
+   * An element with .dndPlaceholder class will be added as child of the dnd-list
+   * while the user is dragging over it.
+   */
+  .dropzone .dndPlaceholder {
+    background-color: #ddd;
+    min-height: 42px;
+    display: block;
+    position: relative;
+  }
+
+
+  /***************************** Element Selection *****************************/
+
+  .selected .richText,
+  .selected .product,
+  .selected .productList,
+  .selected .imageAds,
+  .selected .nullLine,
+  .selected .notice,
+  .selected .productSearch,
+  .selected .productGroup,
+  .selected .object,
+  .selected .separator,
+  .selected .imageNavigation{
+    color: #3c763d;
+    background-color: #dff0d8;
+  }
+
+  .richText,
+  .product,
+  .productList,
+  .imageAds,
+  .nullLine,
+  .notice,
+  .productSearch,
+  .productGroup,
+  .object,
+  .separator,
+  .imageNavigation{
+    width: 100%;
+  }
+
+  .selected .box {
+    border-color: #d6e9c6;
+  }
+
+  .selected .box > h3 {
+    color: #3c763d;
+    background-color: #dff0d8;
+    background-image: linear-gradient(to bottom,#dff0d8 0,#d0e9c6 100%);
+    border-color: #d6e9c6;
+  }
+
+
+  .template-title{
+    background: url("/images/template_title.png") no-repeat;
+    position: relative;
+  }
+  .template-title>span{
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    width: 320px;
+    display: block;
+    bottom: 12px;
+    position: absolute;
+  }
+
+
+  /**============ 组件 =========*/
+  .productSearch>.ui.icon.input{
+    margin: 0 5px;
+    display: block;
+  }
+  .productSearch>.ui.icon.input>input
+  {
+    width: 100%;
+    border-radius: 100px;
+  }
+  .tpanel{
+    /*position: fixed;*/
+    /*bottom: 50px;*/
+    /*left: 0;*/
+    background-color: #fff;
+    z-index: 1000 !important;
+    /*border: 1px solid #ddd;*/
+    display: block;
+    clear: both;
+  }
+  .popover {
+    width: 640px;
+    /*left: 0 !important;*/
+    max-width: 100% !important;
+    min-width: 320px !important;
+  }
+  .ui.card, .ui.cards>.card {
+    position: inherit;
+  }
+  .ui.cards a.card:hover, .ui.link.card:hover, .ui.link.cards .card:hover, a.ui.card:hover{
+    transform: inherit;
+  }
+  /*.dimmer{*/
+  /*min-height: 100px !important;*/
+  /*}*/
+  .title-btn{
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    padding: 7px 9px !important;
+    border-radius: 100px !important;
+  }
+  .title-btn i{
+    font-size: 1.4rem !important;
+  }
+  .ui.card {
+    width: 340px !important;
+    border: 10px solid #000 !important;
+    border-radius: 40px !important;
+    border-bottom-width: 80px !important;
+    border-top-width: 80px !important;
+  }
+  .ui.card>.r{
+    height: 0;
+    position: relative;
+  }
+  .ui.card>.r:after{
+    display: block;
+    content: ' ';
+    position: absolute;
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    left: 140px;
+    bottom: 0;
+    border: 2px solid #E6E6E6;
+    margin-bottom: -55px;
+  }
+  @media only screen and (max-width: 991px) and (min-width: 768px){
+
+    .tpanel.fixed{
+      top: 0 !important;
+    }
+    .sticky.fixed {
+      top: 60px !important;
+    }
+  }
+  @media only screen and (max-width: 767px){
+    .tpanel.fixed{
+      top: 0 !important;
+    }
+    .sticky.fixed {
+      top: 60px !important;
+    }
+    #editPanel,.popover {
+      /*left: inherit !important;*/
+    }
+  }
+
+  @media only screen and (max-width: 1199px) and (min-width: 992px)
+  {
+    .tpanel.fixed{
+      top: 46px !important;
+    }
+    .sticky.fixed {
+      top: 106px !important;
+    }
+  }
+  @media only screen and (min-width: 1200px){
+    .tpanel.fixed{
+      top: 46px !important;
+    }
+    .sticky.fixed {
+      top: 106px !important;
+    }
+  }
+</style>
+
+<script>
+  isAjaxToIO = true;
+  //路由、功能列表
+  var menus = [
+    {key: 'tree',     name: '树形选择组件'},
+    {key: 'ckeditor', name: '富文本编辑'},
+    {key: 'export',   name: '导出数据'},
+    {key: 'layout',   name: '动态布局'},
+    {key: 'upload',   name: '上传组件'},
+    {key: 'mq',       name: '消息推送'},
+    {key: 'rpc',      name: '远程调用'},
+    {key: 'sms',      name: '发送短信'},
+    {key: 'pay',      name: '在线支付'},
+    {key: 'search',      name: '表单'}
+  ];
+
+  var routes = {};
+
+  mosApp.config(function ($urlRouterProvider, $stateProvider) {
+      //$urlRouterProvider.otherwise('/404');
+      //$stateProvider.state('404', {url: '/404', templateUrl: "/page/home/notfound"});
+      angular.forEach(menus, function (item, index) {
+        var value = {name: item.name, url: '/'+item.key+'/:name', templateUrl: "/page/demo/"+item.key};
+        //注册路由
+        $stateProvider.state(item.key, value);
+      });
+
+    })
+
+    .controller('DemoCtrl', function ($rootScope, $scope, $state, $http) {
+      $scope.name = "示例中心";
+      $scope.pages = [];
+
+      angular.forEach(menus, function (item, index) {
+        //功能菜单
+        $scope.pages.push({name: item.name, url: item.key});
+      });
+
+      $scope.$on('$viewContentLoaded',
+        function(event, viewConfig){
+          console.log('viewContentLoaded ...');
+        });
+
+      $scope.$on('$viewContentLoading',
+        function(event){
+          console.log('viewContentLoading ...');
+        });
+
+
+
+
+      $scope.$on('$stateChangeError', function(event) {
+        console.error('state 404...');
+        $state.go('404');
+      });
+
+      $scope.$on('$stateNotFound', function(event){
+        console.error('$stateNotFound...'); // {inherit:false} + default options
+        $state.go('404');
+      });
+
+    })
+
+    .controller('pageCtrl', function ($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q) {
+      pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q);
+    });
+
+</script>
+<%- include ../../share/includ_ckeditor.ejs %>
+<div ng-app="mosApp" ng-controller="DemoCtrl" style="padding: 15px">
+  <h1>{{name}}</h1>
+  <div class="form-group">
+    <a class="btn btn-success" ng-repeat="p in pages" href="#/{{p.url}}/{{p.name}}" style="margin-right: 5px">{{p.name}}</a>
+  </div>
+  <hr/>
+  <div ui-view autoscroll="false" class="fade-in-up"> </div>
+</div>

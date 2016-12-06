@@ -1,0 +1,397 @@
+<style>
+  .btn-width {
+    padding-left: 20px;
+    padding-right: 20px;
+
+  }
+
+  input.input-group-btn,
+  button.input-group-btn {
+    margin-left: -1px;
+    border-left: none;
+  }
+
+  select.input-group-btn {
+    margin-left: -1px;
+  }
+
+  .input-group .fist,
+  .input-group .fist {
+    border-left: 1px solid #ddd !important;
+    margin-left: 0 !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+  }
+
+  .input-group .last,
+  .input-group .last {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+  }
+
+</style>
+<script>
+
+  function htmlValue(v) {
+    return "" + v;
+  }
+
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q) {
+
+    $scope.param = $stateParams;
+
+    $scope.schema = {
+      type : 'object',
+      title : 'Upload',
+      properties : {
+        f1 : {
+          type : 'string'
+        },
+        f2 : {
+          type : 'string'
+        },
+        f3 : {
+          title : '日期',
+          type : 'string'
+        },
+        f4 : {
+          title : '搜索',
+          type : 'string'
+        },
+        tb : {
+          title : '表格',
+          type : 'object'
+        }
+      }
+    };
+
+
+    $scope.onSubform = function () {
+
+    };
+
+    $scope.getData = function (params) {
+
+      var defer = $q.defer()
+
+      //params.count()每页记录数
+      //params.page() 当前页
+      console.log('call getData...第' + params.page() + '页');
+      //console.log(JSON.stringify(params));
+      var _data = [];
+      for (var i = 0 ; i < params.count() ; i++)
+        _data.push({
+          id : ((i + 1) + (params.count() * (params.page() - 1))),
+          name : '名称' + ((i + 1) + (params.count() * (params.page() - 1))),
+          age : Math.floor(Math.random(i + 1) * 20),
+          money : Math.floor(Math.random(i + 1) * 3000),
+          selected : false
+        });
+
+      $timeout(function() {
+        params.total(200);
+        defer.resolve(_data);
+      }, 200)
+
+      return defer.promise;
+    }
+
+    $scope.form = [
+
+
+      {
+        //type : 'mos-array',
+        fieldHtmlClass : 'input-group',
+        //placeholder : '请输入接口地址',
+        items : [
+          {
+            key : 'f1',
+            "type" : "select",
+            htmlClass : 'input-group-btn',
+            fieldHtmlClass : 'fist input-group-btn',
+            "titleMap" : [
+              {name : "a", value : "A"},
+              {name : "b", value : "B"},
+              {name : "c", value : "C"}
+            ]
+          },
+          {
+            "type" : "select",
+            htmlClass : 'input-group-btn',
+            fieldHtmlClass : 'input-group-btn',
+            "titleMap" : [
+              {name : "a", value : "A"},
+              {name : "b", value : "B"},
+              {name : "c", value : "C"}
+            ]
+          },
+          {
+            key : 'f2',
+            placeholder : '....',
+            type : "date-range",
+            htmlClass : 'input-group-btn',
+            fieldHtmlClass : 'input-group-btn',
+            //templateUrl: '/templates/daterange.html',
+            enabletimepicker : MosEnum.momentTimepicker,
+            //singleDatePicker: true,
+            //minDate:moment('1970-1-1','YYYY-MM-DD'),
+            //maxDate:moment(),
+            //limit: "30 days",
+            locale : MosEnum.momentLocales,
+            ranges : MosEnum.momentRanges
+          },
+          {
+            placeholder : '....',
+            type : "date-range",
+            htmlClass : 'input-group-btn',
+            fieldHtmlClass : 'last input-group-btn',
+            //templateUrl: '/templates/daterange.html',
+            enabletimepicker : MosEnum.momentTimepicker,
+            //singleDatePicker: true,
+            //minDate:moment('1970-1-1','YYYY-MM-DD'),
+            //maxDate:moment(),
+            //limit: "30 days",
+            locale : MosEnum.momentLocales,
+            ranges : MosEnum.momentRanges
+          }
+
+        ]
+
+      },
+      {
+        key : 'f3',
+        placeholder : '....',
+        type : "date-range",
+        fieldAddonRight : {
+          htmlClass : 'fa fa-calendar'
+        },
+        //templateUrl: '/templates/daterange.html',
+        enabletimepicker : MosEnum.momentTimepicker,
+        //singleDatePicker: true,
+        //minDate:moment('1970-1-1','YYYY-MM-DD'),
+        //maxDate:moment(),
+        //limit: "30 days",
+        locale : MosEnum.momentLocales,
+        ranges : MosEnum.momentRanges
+      },
+      {
+        key : 'f4',
+        placeholder : 'keyword',
+        'fieldAddonRight' : {
+          type : 'button',
+          title : '搜索',
+          //htmlClass: 'btn btn-primary',
+          style : 'last btn-primary',
+          icon : 'fa fa-search',
+          onClick : $scope.onSubform
+        },
+        type : "input"
+      },
+
+      // ================== 表格对象 =======================
+      {
+        key : 'tb',
+        startEmpty : true,
+        type : "table",
+
+        //工具条
+        toolbar : [
+
+          //删除按钮
+          {
+            name : '删除', icon : 'fa fa-remove',
+
+            //显示按钮的条件
+            condition : function () {
+              return true;//!!$scope.model.delFlag;
+            },
+
+            //点击按钮的事件
+            action : function () {
+              console.log('删除');
+              showInfo('删除');
+            }
+          },
+
+          //编辑
+          {
+            name : '编辑', icon : 'fa fa-edit',
+            action : function () {
+              console.log('编辑');
+              showInfo('编辑');
+            }
+          },
+
+          //回收站
+          {
+            name : '回收站', icon : 'fa fa-recycle',
+            action : function () {
+              console.log('回收站');
+              showInfo('回收站');
+            }
+          }
+        ],
+
+        //表格初始化参数
+        tableParams : new NgTableParams({
+          count : 10
+        }, {
+
+          counts : [ 10, 20, 30, 50, 100 ],
+
+          paginationMaxBlocks : 9,
+
+          //装载服务器数据方法（如果使用客户端装载方式，请用data对象）
+          getData : $scope.getData
+        }),
+
+        //全选事件处理
+        selectAll : tableSelectAll,
+
+        //单个选中事件处理
+        selectOne : tableSelectOne,
+
+        //单选选中项
+        selected : null,
+
+        //是否显示切换示图按钮
+        showToggle: true,
+
+        //是否切换示图
+        toggleView: false,
+
+        //表格列定义
+        items : [
+
+          //多选行
+          {
+            type : 'checkRow',
+            title : '',
+            headerTemplateURL : "headerCheckbox.html", //全选表头
+            style : {width : '30px', 'text-align' : 'center'},
+            show : true
+          },
+
+          //单选行
+          {
+            type : 'radioRow',
+            title : "单选",
+            style : {width : '30px', 'text-align' : 'center'},
+            show : true
+          },
+
+          //数据对象ID列
+          {
+            field : "id",
+            type : 'txt',
+            style : {width : '30px', 'text-align' : 'center'},
+            title : "ID",
+            sortable : 'id',
+            show : true
+          },
+
+          //数据序列显示
+          {
+            type : 'serial',
+            style : {width : '30px', 'text-align' : 'center'},
+            title : "序号",
+            show : true
+          },
+
+          //字段，姓名
+          {
+            field : "name",
+            groupable : true,
+            type : 'actionLink',
+            title : "姓名",
+            sortable : 'name',
+            show : true,
+            formatter : function (field, row, index) {
+              return "<span>"+field+"</span>";
+            },
+            action : function (thisObj, row) {
+              console.log('call actionLink action...');
+            }
+          },
+
+          //字段。。。
+          {
+            field : "age",
+            type : 'txt',
+            title : "年龄",
+            sortable : 'age',
+            show : true,
+            formatter : function (field, row, index) {
+              return $sce.trustAsHtml("<span style='color: red'>"+field+"</span>");
+            }
+          },
+
+          ////字段。。。
+          {
+            field : "money",
+            type : 'txt',
+            title : "资产",
+            show : true,
+            formatter : function (field, row, index) {
+              return $sce.trustAsHtml("<span style='color: #0000ff'>"+field+"</span>");
+            }
+          },
+
+          //功能按钮
+          {
+            type : 'button',
+            title : "",
+            style : {width : '60px', 'text-align' : 'center'},
+            fieldClass : 'btn-success',
+            text : "按我",
+            show : true,
+            action : function (thisObj, row) {
+              console.log('call button action...');
+              showInfo('按我');
+            }
+          } ]
+
+      },
+
+
+      {
+        type : 'actions',
+        fieldHtmlClass : 'btn-success',
+        items : [
+          {
+            type : 'button',
+            title : '清空日志',
+            onClick : function () {//清空日志
+              $scope.model.log = '';
+              showInfo('日志已清空')
+            }
+          }
+        ]
+      }
+    ];
+
+    $scope.model = {
+      f1 : '',
+      //f2 : [],
+      f3 : '',
+      tb : []
+    };
+
+    $scope.$watch('model', function (value) {
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+
+    //$scope.getParams(1);
+  }
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+
+  <div sf-schema="schema" sf-form="form" sf-model="model"
+       sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+
+  <div>{{prettyModel}}</div>
+</div>

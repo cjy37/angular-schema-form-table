@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/simple-line-icons/2.2.3/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.theme.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-daterangepicker/2.1.18/daterangepicker.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/angular.js/1.4.9/angular-csp.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://zhangguiplus.oss-cn-shenzhen.aliyuncs.com/assets/lib/Swiper/dist/css/swiper.min.css">
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/ng-table/1.0.0/ng-table.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/angular-ui-select/0.20.0/select.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css">
+
+    <!-- BEGIN CORE PLUGINS -->
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.js"></script>
+    <script src="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://cdn.bootcss.com/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+    <script src="http://cdn.bootcss.com/moment.js/2.10.6/moment.min.js"></script>
+    <script src="http://cdn.bootcss.com/moment.js/2.10.6/moment-with-locales.min.js"></script>
+    <script src="http://cdn.bootcss.com/moment.js/2.10.6/locale/zh-cn.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-daterangepicker/2.1.18/daterangepicker.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN CORE ANGULARJS PLUGINS -->
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-sanitize.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-touch.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-route.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.5.0/angular-animate.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/i18n/angular-locale_zh-cn.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="http://cdn.bootcss.com/jstree/3.2.1/jstree.min.js"></script>
+
+    <script src="http://cdn.bootcss.com/ng-table/1.0.0/ng-table.min.js"></script>
+    <!-- END CORE ANGULARJS PLUGINS -->
+
+    <!--SCRIPTS-->
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/select2/select2_locale_zh-CN.js"></script>
+    <script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="bower_components/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
+    <script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/ng-bs-daterangepicker/dist/ng-bs-daterangepicker.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    <script src="bower_components/ng-js-tree/ngJsTree.js"></script>
+    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-bootstrap-colorpicker/3.0.25/js/bootstrap-colorpicker-module.min.js"></script>
+    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+    <script src="bower_components/angular-fancybox-plus/js/angular-fancybox-plus.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-select/0.20.0/select.min.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="http://cdn.bootcss.com/angularjs-dropdown-multiselect/1.5.2/angularjs-dropdown-multiselect.min.js"></script>
+    <script src="http://cdn.bootcss.com/tv4/1.2.7/tv4.min.js"></script>
+    <script src="bower_components/objectpath/lib/ObjectPath.js"></script>
+    <script src="http://cdn.bootcss.com/angular-schema-form/0.8.13/schema-form.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-schema-form/0.8.13/bootstrap-decorator.min.js"></script>
+    <script src="http://cdn.bootcss.com/tv4/1.2.7/lang/zh-CN.min.js"></script>
+    <script src="bower_components/angular-schema-form-dynamic-select/ui-sortable.js"></script>
+    <script src="bower_components/angular-schema-form-dynamic-select/angular-schema-form-dynamic-select.js"></script>
+    <script src="bower_components/angular-schema-form-dynamic-select/app.js"></script>
+    <script src="bower_components/schema-form-datetimepicker/schema-form-date-time-picker.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/tableExport.jquery.plugin/tableExport.min.js"></script>
+    <script src="bower_components/jspdf/dist/jspdf.min.js"></script>
+    <script src="bower_components/jspdf-autotable/dist/jspdf.plugin.autotable.js"></script>
+    <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
+    <script src="bower_components/fancybox-plus/dist/jquery.fancybox-plus.js"></script>
+    <script src="bower_components/filesaver.js/FileSaver.js"></script>
+    <script src="bower_components/angular-bootstrap-grid-tree/src/tree-grid-directive.js"></script>
+    <!--SCRIPTS END-->
+
+    <script src="bootstrap-table.js"></script>
+    <script src="demo.js"></script>
+
+    <!--
+   includ angular ckeditor
+   https://github.com/lemonde/angular-ckeditor
+   -->
+    <script src="http://cdn.bootcss.com/ckeditor/4.4.5/ckeditor.js"></script>
+    <script src="http://cdn.bootcss.com/ckeditor/4.4.5/lang/zh-cn.js"></script>
+    <script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+    <script>
+        mosApp.requires.push('ckeditor');
+    </script>
+
+</head>
+
+<body style="padding-top:0;width:100%;height: 100%; background-color: #FFFFFF;" ng-app="mosApp">
+
+
+<script>
+    isAjaxToIO = true;
+    //路由、功能列表
+    var menus = [
+        {key: 'tree',     name: '树形选择组件'},
+        {key: 'ckeditor', name: '富文本编辑'},
+        {key: 'export',   name: '导出数据'},
+        {key: 'layout',   name: '动态布局'},
+        {key: 'upload',   name: '上传组件'},
+        {key: 'mq',       name: '消息推送'},
+        {key: 'rpc',      name: '远程调用'},
+        {key: 'sms',      name: '发送短信'},
+        {key: 'pay',      name: '在线支付'},
+        {key: 'search',      name: '表单'}
+    ];
+
+    var routes = {};
+
+    mosApp.config(function ($urlRouterProvider, $stateProvider) {
+        //$urlRouterProvider.otherwise('/404');
+        //$stateProvider.state('404', {url: '/404', templateUrl: "/page/home/notfound"});
+        angular.forEach(menus, function (item, index) {
+            var value = {name: item.name, url: '/'+item.key+'/:name', templateUrl: "templates/"+item.key+".html"};
+            //注册路由
+            $stateProvider.state(item.key, value);
+        });
+
+    })
+
+            .controller('DemoCtrl', function ($rootScope, $scope, $state, $http) {
+                $scope.name = "示例中心";
+                $scope.pages = [];
+
+                angular.forEach(menus, function (item, index) {
+                    //功能菜单
+                    $scope.pages.push({name: item.name, url: item.key});
+                });
+
+                $scope.$on('$viewContentLoaded',
+                        function(event, viewConfig){
+                            console.log('viewContentLoaded ...');
+                        });
+
+                $scope.$on('$viewContentLoading',
+                        function(event){
+                            console.log('viewContentLoading ...');
+                        });
+
+
+
+
+                $scope.$on('$stateChangeError', function(event) {
+                    console.error('state 404...');
+                    $state.go('404');
+                });
+
+                $scope.$on('$stateNotFound', function(event){
+                    console.error('$stateNotFound...'); // {inherit:false} + default options
+                    $state.go('404');
+                });
+
+            })
+
+            .controller('pageCtrl', function ($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q) {
+                pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q);
+            });
+
+</script>
+
+<script src="http://cdn.bootcss.com/ckeditor/4.4.5/ckeditor.js"></script>
+<script src="http://cdn.bootcss.com/ckeditor/4.4.5/lang/zh-cn.js"></script>
+<script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+<script>
+    mosApp.requires.push('ckeditor');
+</script>
+
+<div ng-app="mosApp" ng-controller="DemoCtrl" style="padding: 15px">
+    <h1>{{name}}</h1>
+    <div class="form-group">
+        <a class="btn btn-success" ng-repeat="p in pages" href="#/{{p.url}}/{{p.name}}" style="margin-right: 5px">{{p.name}}</a>
+    </div>
+    <hr/>
+    <div ui-view autoscroll="false" class="fade-in-up"> </div>
+</div>
+
+<div id="infoBox" class="ht-info-box aHide" style="visibility: hidden;">
+    <span class="ht-info-text"></span>
+</div>
+
+<div class="loading aHide" style="top: 300px; bottom: auto; position: fixed;visibility: hidden;">
+    <div class="ui active dimmer" style="width: 150px;height: 100px;position: relative;">
+        <div class="ui text loader">请稍后...</div>
+    </div>
+    <p></p>
+</div>
+
+</body>
+</html>

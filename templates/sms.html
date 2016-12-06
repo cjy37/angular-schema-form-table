@@ -1,0 +1,134 @@
+<style>
+  .sendbtn{
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #0085d8;
+    color: #fff;
+    border-color: #0085d8;
+  }
+  .sendbtn:hover{
+
+    background-color: #00beff;
+    color: #fff;
+    border-color: #00beff;
+  }
+</style>
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+
+    $scope.param = $stateParams;
+
+    $scope.schema = {
+      type : 'object',
+      title : 'Upload',
+      properties : {
+        to : {
+          title : '手机号',
+          type : 'string'
+        },
+        type : {
+          title : '类型',
+          type : 'number'
+        },
+        data : {
+          title : '数据',
+          type : 'string'
+        },
+        log : {
+          title : '日志',
+          type : 'string'
+        }
+      }
+    };
+
+
+    $scope.form = [
+      {
+        key : 'to',
+        placeholder : '请输入手机号',
+        type : 'input'
+      },
+      {
+        key: 'type',
+        type: "radiobuttons",
+        titleMap: [
+          {value : 0, name : "文本"},
+          {value : 1, name : "语音"}
+        ]
+      },
+      {
+        key : 'data',
+        placeholder : '请输入数据',
+        type : 'input',
+        fieldAddonLeft : '@',
+        fieldAddonRight : {
+          type : 'button',
+          htmlClass: 'sendbtn',
+          enable : true,
+          title : '发送',
+          onClick : function () {//发送
+            if ($scope.model.url == '') {
+              showInfo('请输入手机号！')
+              return;
+            }
+            if ($scope.model.data == '') {
+              showInfo('请输入数据！')
+              return;
+            }
+
+            var reqData = angular.extend({}, $scope.model);
+            delete reqData.log;
+
+            console.log("发送到：" + reqData.to);
+            ajaxPost($http, '/page/demo/tosms', reqData, '获取用户列表' , function (resData) {
+              $scope.model.log += moment().format('HH:mm:ss ') + JSON.stringify(resData) + "\n";
+              if (isAjaxToIO)
+                $scope.$digest();
+            });
+          }
+        }
+      },
+      {
+        key : 'log',
+        placeholder : '还没有日志',
+        type : "textarea"
+      },
+      {
+        type : 'actions',
+        fieldHtmlClass : 'btn-success',
+        items : [
+          {
+            type : 'button',
+            title : '清空日志',
+            onClick : function () {//清空日志
+              $scope.model.log = '';
+              showInfo('日志已清空')
+            }
+          }
+        ]
+      }
+    ];
+
+    $scope.model = {
+      to : '13428996668',
+      data : '54321',
+      type: 0,
+      log : ''
+    };
+
+    $scope.$watch('model', function (value) {
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+
+  <div sf-schema="schema" sf-form="form" sf-model="model"
+       sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+
+  <div>{{prettyModel}}</div>
+</div>

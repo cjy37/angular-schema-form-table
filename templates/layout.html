@@ -1,0 +1,233 @@
+<link rel="stylesheet" href="/page_css/micro_page_layout.css">
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $parse) {
+
+    function removeElementByClass(cls) {
+      cls = 'dimmable-item-'+$scope.editConfig.ids;
+      var elem=document.getElementsByClassName(cls);
+      if (elem.length==0)
+        return;
+      $('.popover').hide();
+
+      setTimeout(function () {
+        $(elem).click();
+      }, 0);
+    }
+
+    $scope.param = $stateParams;
+    $scope.richTextOption = {
+      language : 'zh-cn',
+        allowedContent : true,
+        entities : false,
+        filebrowserImageUploadUrl : CtrlEnum.ckeditor.filebrowserImageUploadUrl,
+        toolbar : CtrlEnum.ckeditor.toolBarText//CtrlEnum.ckeditor.basicToolBar//
+    };
+
+    $scope.templates = [
+      {
+        name: '富文本',
+        type: "richText",
+        text: '富文本富文本富文本富文本',
+        option:{borderWidth: 0, padding: 8}
+      },
+      {name: '辅助线', type: "separator", option:{height: 20, padding: 0, borderWidth: 0}},
+      {name: '辅助空行', type: "nullLine", option:{height: 20, borderWidth: 0, padding: 0}},
+      {name: '商品搜索', type: "productSearch", option:{borderRadius: 20, borderWidth: 0, padding: 8}},
+
+      {name: '公告', type: "notice", "text": "这是公告", option:{borderWidth: 0, padding: 8}},
+      {name: '图片广告', type: "imageAds",  option:{borderWidth: 0, padding: 8}},
+      {name: '商品分组', type: "productGroup", option:{height: 10, borderWidth: 0, padding: 8}},
+
+      {name: '商品', type: "product",  option:{borderWidth: 0, padding: 8}},
+      {name: '商品列表', type: "productList",
+        products: [
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100},
+          {name: "test1", amount: 100}
+        ],
+        option: {column:2,  borderWidth: 0, padding: 8}},
+      {name: '图片导航', type: "imageNavigation", option:{height: 10, borderWidth: 0, padding: 8}}
+    ];
+
+    $scope.selected = {item:null};
+
+    //页面设置：{type:'page', option:{title:'',hasPadding: 0, backColor:'#fff'}}
+    $scope.models = {
+      "page" : {
+        "type" : "page",
+        "name" : "页面设置",
+        "title" : "自定义页",
+        "option" : {"hasPadding" : 0, "backColor" : "#fff", "borderWidth" : 0, "padding" : 0}
+      },
+      "list" : [ {
+        "option" : {"borderWidth" : 0, "padding" : 0},
+        "name" : "富文本",
+        "type" : "richText",
+        "text" : "<p><img alt=\"\" src=\"/uploads/2016/03/11/0a74a8d7-b525-4640-b42f-372872cfd702.png\" style=\"line-height: 20.8px; width: 200px; height: 125px; float: right;\" /><strong>富文本</strong></p>\n\n<p><strong>富文本富</strong></p>\n\n<p><strong>文本富</strong></p>\n\n<p><strong>文本</strong></p>\n",
+      }, {
+        "option" : {"borderWidth" : 0, "padding" : 0},
+        "name" : "富文本",
+        "type" : "richText",
+        "text" : "<p><img alt=\"\" src=\"/uploads/2016/03/11/1c742236-a4a7-41e3-b8e4-44abc153a356.jpg\" style=\"width: 200px; height: 141px; float: left;\" />富文本</p>\n\n<p><span style=\"font-size:36px;\">富文本富文</span></p>\n\n<p>本富文本</p>\n",
+      }, {
+        "name" : "商品搜索",
+        "type" : "productSearch",
+        "option" : {"borderRadius" : 20, "borderWidth" : 0, "padding" : 8}
+      }, {
+        "name" : "公告",
+        "type" : "notice",
+        "text" : "这是公告",
+        "option" : {"borderWidth" : 0, "padding" : 8}
+      } ]
+    };
+
+    $scope.addElement = function (template) {
+      var tmp = angular.copy(template);
+      tmp.$$hashKey = (new Date).getTime();
+      $scope.models.list.push(tmp);
+      //$scope.showButtonMenu();
+//      setTimeout(function () {
+//        $('.special.cards .blurring.dimmable').dimmer({
+//          on: 'hover'
+//        });
+//      }, 200);
+    };
+
+    $scope.delSelectedElement = function (event, item, ids) {
+      removeElementByClass('popover');
+      $scope.editConfig = {url:'', title:'', ids: null};
+      if (item)
+      {
+        $scope.models.list.remove(item);
+        $scope.selected.item = null;
+        return;
+      }
+      $scope.models.list.remove($scope.selected.item);
+      $scope.selected.item = null;
+    }
+
+    $scope.closeElement = function () {
+      removeElementByClass('popover');
+      $scope.selected.item = null;
+      $scope.editConfig = {url:'', title:'', ids: null};
+    }
+
+
+    $scope.$watch('models', function(value){
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+
+
+    $scope.dragDelElement = function (item, index) {
+      //setTimeout(function () {
+        //$scope.models.list.splice(index, 1);
+        $scope.models.list.remove(item);
+      //}, 200);
+    }
+
+    $scope.init = function () {
+//      setTimeout(function () {
+//        $('.special.cards .blurring.dimmable').dimmer({
+//          on: 'hover'
+//        });
+//      }, 200);
+      $scope.editItem(null, $scope.models.page, 'page');
+      removeElementByClass('');
+    };
+
+    $scope.showButtonMenu = function () {
+      $('.ui.labeled.icon.sidebar')
+        .sidebar('toggle');
+    }
+
+    $scope.editConfig = {url:'', title:'', ids: 'page'};
+    $scope.editItem = function(event, item, ids){
+      $scope.selected.item = item;
+      console.log('=============');
+      $scope.editConfig.url = "/templates/edit/"+item.type+".html";
+      $scope.editConfig.title = item.name+'编辑';
+      $scope.editConfig.ids = ids;
+    };
+
+  }
+</script>
+<div id="abc" class="ui one column grid container" ng-controller="pageCtrl" style="position: relative" ng-init="init()">
+
+  <!-- Menu -->
+  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" ng-repeat="item in templates" ng-click="addElement(item)">
+      <i class="plus icon"></i>{{item.name}}
+    </a>
+  </div>
+
+  <div class="column">
+    <!-- Main -->
+    <div class="ui centered special cards">
+      <div class="ui link card" style="width: 320px; min-width: 320px;" ng-style="{'background-color':models.page.option.backColor}">
+
+        <div class="blurring dimmable dimmable-item-page" ng-init="item = models.page"
+             uib-popover-template="'editPopoverTemplate.html'"
+             popover-title="{{editConfig.title}}"
+             popover-placement="bottom"
+             popover-trigger="outsideClick"
+             ng-click="editItem($event, models.page,'page')">
+          <div ng-include="'/templates/page/page.html'"></div>
+        </div>
+        <div class="ui" style="height: 480px;overflow: auto;" ng-style="{'padding': (models.page.option.hasPadding*5)}">
+          <div class="dropzone" dnd-list="models.list">
+            <div ng-repeat="$$value$$ in models.list"
+                class="blurring dimmable dimmable-item-{{$index}}"
+                dnd-draggable="$$value$$"
+                dnd-effect-allowed="move"
+                dnd-moved="dragDelElement($$value$$, $index)"
+
+                uib-popover-template="'editPopoverTemplate.html'"
+                popover-title="{{editConfig.title}}"
+                popover-placement="bottom"
+                popover-trigger="outsideClick"
+
+                ng-click="editItem($event, $$value$$,$index)"
+                ng-style="{'padding': ($$value$$.option.padding||0)+'px 0'}"
+                ng-class="{selected: selected.item === $$value$$}">
+
+              <div ng-include="'/templates/page/'+$$value$$.type + '.html'"></div>
+            </div>
+          </div>
+        </div>
+        <div class="extra content" style="background-color: #F5F5F5">
+          <a ng-click="showButtonMenu()" class="left floated like"><i class="add icon"></i>增加组件</a>
+          <a ng-click="overview()" class="right floated star"><i class="browser icon"></i>预览</a>
+        </div>
+        <div class="r"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--log-->
+  <div class="row">{{prettyModel}}</div>
+  <!--<div class="row" ng-if="selected.item" style="height: 300px;"></div>-->
+  <!--popover-->
+
+  <script type="text/ng-template" id="editPopoverTemplate.html">
+    <div id="editPanel">
+      <button ng-if="selected.item" ng-show="selected.item.type!='page'" class="circular ui icon button title-btn" ng-click="delSelectedElement()" style="right: 38px">
+        <i class="trash outline icon"></i>
+      </button>
+      <button class="circular ui icon button title-btn" ng-click="closeElement()">
+        <i class="fa fa-close"></i>
+      </button>
+      <div ng-if="selected.item">
+        <div ng-include="editConfig.url"></div>
+      </div>
+    </div>
+  </script>
+
+</div>

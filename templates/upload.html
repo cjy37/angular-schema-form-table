@@ -1,0 +1,94 @@
+
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+    $scope.param = $stateParams;
+    $scope.schema = {
+      type: 'object',
+      title: 'Upload',
+      properties: {
+        name: {
+          title: '姓名',
+          type: 'string'
+        },
+        pic: {
+          title: '头像',
+          type: 'object'
+        },
+        pics: {
+          title: '图片列表',
+          type: 'object'
+        }
+      }
+    };
+    /*
+     // 单张图片的对象格式：
+     pic: "/uploads/2016/02/15/632e1d57-38cd-4e20-b168-650fa068ec74.png"
+
+     // 多张图片的对象格式：
+     pics:[
+     "/uploads/2016/02/15/1c524787-390b-417b-84a8-fbd7886d54ea.png",
+     "/uploads/2016/02/15/58c840cd-4105-4111-833d-552f14888378.png"]
+
+     */
+    $scope.model = {
+      name : '',
+      //pic : null,
+      pics : []
+    };
+
+    $scope.form = [
+      'name',
+      {
+        key: 'pic',//字段
+        options: {
+          showThumb: true,        //是否显示缩略图
+          thumbSize: 100,          //缩略图大小
+          uploadPic: function(data, form, thisModel) {
+            uploadUsing(Upload, data, form, function (ret) {
+              $scope.model.pic = ret.url || '/img/loading.gif';
+            }, $scope);
+          }
+        },
+        type: "template",
+        templateUrl: "/templates/uploadpic.html"
+        //type: "uploadpic"
+      },
+      {
+        key: 'pics',//字段
+        options: {
+          showThumb: true,        //是否显示缩略图
+          thumbSize: 20,          //缩略图大小
+          init: uploadMultipleInit,
+          deleteFn: uploadMultipleDelete,
+          uploadPics: function(datas, form, thisModel) {
+            uploadMultiple(Upload, datas, form, function (ret) {
+              //TODO...
+            }, $scope, thisModel);
+          }
+        },
+        type: "template",
+        templateUrl: "/templates/uploadpics.html"
+        //type: "uploadpics"
+      }
+    ];
+
+
+    $scope.$watch('model', function(value){
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+  <!--<span class="info">{{error}}</span>-->
+  <!--<form name="ngform" ng-submit="submitForm(ngform)">-->
+    <div sf-schema="schema" sf-form="form" sf-model="model" sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+  <!--</form>-->
+
+
+  <div>{{prettyModel}}</div>
+</div>

@@ -1,0 +1,203 @@
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+
+    $scope.param = $stateParams;
+
+    $scope.schema = {
+      type : 'object',
+      title : 'Upload',
+      properties : {
+        subject : {
+          title : '商品名',
+          type : 'string'
+        },
+        desc : {
+          title : '商品描述',
+          type : 'string'
+        },
+        amount : {
+          title : '金额',
+          type : 'number'
+        },
+        order_no : {
+          title : '订单号',
+          type : 'string'
+        },
+        channel: {
+          title : '支付类型',
+          type : 'string'
+        },
+        log : {
+          title : '日志',
+          type : 'string'
+        }
+      }
+    };
+
+
+    $scope.form = [
+      {
+        key : 'subject',
+        placeholder : '请输入商品名',
+        type : 'input'
+      },
+      {
+        key: 'channel',
+        type: "radiobuttons",
+        titleMap: [
+          {value : 'wx_pub', name : "微信"},
+          {value : 'alipay_wap', name : "支付宝"},
+          {value : 'upacp_wap', name : "银联"},
+          {value : 'applepay_upacp', name : "Apple Pay"}
+        ]
+      },
+      {
+        key: 'desc',
+        placeholder : '请输入商品描述',
+        type : 'input'
+      },
+      {
+        key : 'order_no',
+        placeholder : '请输入订单号',
+        type : 'input'
+      },
+      {
+        key: 'amount',
+        placeholder : '请输入金额',
+        type : 'input',
+        subType: 'number',
+        fieldAddonLeft : '@',
+        fieldAddonRight : {
+          type : 'button',
+          enable : true,
+          title : '支付',
+          onClick : function () {//发送
+            if ($scope.model.subject == '') {
+              showInfo('请输入商品名！');
+              return;
+            }
+            if ($scope.model.amount == '' || $scope.model.amount == 0) {
+              showInfo('请输入金额！');
+              return;
+            }
+
+            var reqData = angular.extend({}, $scope.model);
+            delete reqData.log;
+
+            pingpp_one.init({
+              app_id:'<%- sails.config.pay.App_ID%>',                     //该应用在 ping++ 的应用 ID
+              order_no:$scope.model.order_no,                     //订单在商户系统中的订单号
+              amount:1,                                   //订单价格，单位：人民币 分
+              // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+              channel:['alipay_wap','wx_pub','upacp_wap','yeepay_wap','jdpay_wap','bfb_wap'],
+              charge_url:'http://k5at4bthnh.proxy.qqbrowser.cc/page/demo/dopay',  //商户服务端创建订单的 url
+              //charge_param:{a:1,b:2},                      //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+              //open_id:'wx1234567890',                      //(可选，使用微信公众号支付时必须传入)
+              debug:true                                   //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
+            },function(res){
+              //debug 模式下获取 charge_url 的返回结果
+              if(res.debug&&res.chargeUrlOutput){
+                console.log(res.chargeUrlOutput);
+              }
+              if(!res.status){
+                //处理错误
+                //alert(res.msg);
+                showInfo(res.msg);
+              }
+              else{
+                //debug 模式下调用 charge_url 后会暂停，可以调用 pingpp_one.resume 方法继续执行
+                if(res.debug&&!res.wxSuccess){
+                  if(confirm('当前为 debug 模式，是否继续支付？')){
+                    pingpp_one.resume();
+                  }
+                }
+                //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，
+                //调用 pingpp_one.success 方法，你也可以自己定义回调函数
+                //其他渠道的处理方法请见第 2 节
+                else pingpp_one.success(function(res){
+                  if(!res.status){
+                    //alert(res.msg);
+                    showInfo(res.msg);
+                  }
+                },function(){
+                  //这里处理支付成功页面点击“继续购物”按钮触发的方法，
+                  //例如：若你需要点击“继续购物”按钮跳转到你的购买页，
+                  //则在该方法内写入 window.location.href = "你的购买页面 url"
+                  //window.location.href='http://yourdomain.com/payment_succeeded';//示例
+                  showInfo('支付成功！');
+                });
+              }
+            });
+
+//
+//
+//
+//
+//            //console.log("发送到：" + reqData.to);
+//            ajaxPost($http, '/page/demo/dopay', reqData, '在线支付' , function (resData) {
+//              $scope.model.log += moment().format('HH:mm:ss ') + JSON.stringify(resData) + "\n";
+//              if (isAjaxToIO)
+//                $scope.$digest();
+//              console.log('开始支付');
+//              pingppPc.createPayment(resData, function(result, error){
+//                if (result == "success") {
+//                  // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
+//                  $scope.model.log +='支付成功\n';
+//                } else if (result == "fail") {
+//                  // charge 不正确或者微信公众账号支付失败时会在此处返回
+//                  $scope.model.log +='支付失败\n';
+//                } else if (result == "cancel") {
+//                  // 微信公众账号支付取消支付
+//                  $scope.model.log +='取消支付\n';
+//                }
+//              });
+//            });
+          }
+        }
+      },
+      {
+        key : 'log',
+        placeholder : '还没有日志',
+        type : "textarea"
+      },
+      {
+        type : 'actions',
+        fieldHtmlClass : 'btn-success',
+        items : [
+          {
+            type : 'button',
+            title : '清空日志',
+            onClick : function () {//清空日志
+              $scope.model.log = '';
+              showInfo('日志已清空')
+            }
+          }
+        ]
+      }
+    ];
+
+    $scope.model = {
+      subject : '测试商品',
+      desc: '商品描述...',
+      amount : 0.01,
+      order_no: 'ZG000000001',
+      channel: 'alipay_wap',
+      log : ''
+    };
+
+    $scope.$watch('model', function (value) {
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+
+  <div sf-schema="schema" sf-form="form" sf-model="model"
+       sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+
+  <div>{{prettyModel}}</div>
+</div>

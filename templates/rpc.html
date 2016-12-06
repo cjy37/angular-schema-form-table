@@ -1,0 +1,131 @@
+<script>
+  function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams) {
+    $scope.param = $stateParams;
+
+    $scope.schema = {
+      type : 'object',
+      title : 'Upload',
+      properties : {
+        url : {
+          title : '接口地址',
+          type : 'string'
+        },
+        data : {
+          title : '数据',
+          type : 'string'
+        },
+        date : {
+          title : 'Date',
+          type : 'string'
+        },
+        log : {
+          title : '日志',
+          type : 'string'
+        }
+      }
+    };
+
+
+    $scope.form = [
+      {
+        key : 'url',
+        placeholder : '请输入接口地址',
+        type : 'input'
+      },
+      {
+        key : 'data',
+        placeholder : '请输入数据',
+        type : 'input',
+        fieldAddonLeft : '@',
+        fieldAddonRight : {
+          type : 'button',
+          enable : true,
+          title : '发送',
+          onClick : function () {//发送
+            if ($scope.model.url == '') {
+              showInfo('请输入接口地址！')
+              return;
+            }
+            if ($scope.model.data == '') {
+              showInfo('请输入数据！')
+              return;
+            }
+
+            var reqData = JSON.parse($scope.model.data) || {};
+            if (!reqData) {
+              showInfo('数据格式不正确！')
+              return;
+            }
+
+            console.log("发送到：" + $scope.model.url);
+
+            ajaxPost.call($scope, $http, $scope.model.url, reqData, '获取用户列表' , function (resData) {
+                $scope.model.log += moment().format('HH:mm:ss ') + JSON.stringify(resData) + "\n";
+            });
+          }
+        }
+      },
+      {
+        key : 'date',
+        placeholder : '....',
+        type : "date-range",
+        fieldAddonRight:{
+          htmlClass: 'fa fa-calendar'
+        },
+        //templateUrl: '/templates/daterange.html',
+        enabletimepicker: MosEnum.momentTimepicker,
+        singleDatePicker: true,
+        minDate:moment('1970-1-1','YYYY-MM-DD'),
+        maxDate:moment(),
+        limit: "30 days",
+        locale: MosEnum.momentLocales,
+        ranges: MosEnum.momentRanges
+      },
+      {
+        key : 'log',
+        placeholder : '还没有日志',
+        type : "textarea"
+      },
+      {
+        type : 'actions',
+        fieldHtmlClass : 'btn-success',
+        items : [
+          {
+            type : 'button',
+            title : '清空日志',
+            onClick : function () {//清空日志
+              $scope.model.log = '';
+              if ($scope.model.date.length > 0)
+              $scope.model.date = '';
+              else
+                $scope.model.date = '2016-03-01 / 2016-03-10'
+              showInfo('日志已清空')
+            }
+          }
+        ]
+      }
+    ];
+
+    $scope.model = {
+      url : '/api/sysuser/getData',
+      data : '{}',
+      date: '2016-03-01 / 2016-03-10',
+      log : ''
+    };
+
+    $scope.$watch('model', function (value) {
+      if (value) {
+        $scope.prettyModel = JSON.stringify(value, undefined, 2);
+      }
+    }, true);
+
+  }
+</script>
+<div ng-controller="pageCtrl">
+  <h3>{{param.name}}</h3>
+
+  <div sf-schema="schema" sf-form="form" sf-model="model"
+       sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+
+  <div>{{prettyModel}}</div>
+</div>
