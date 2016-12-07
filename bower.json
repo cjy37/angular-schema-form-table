@@ -42,7 +42,6 @@
     "tableExport.jquery.plugin": "hhurz/tableExport.jquery.plugin",
     "ng-bs-daterangepicker": "cjy37/ng-bs-daterangepicker",
     "angular-fancybox-plus": "^1.0.3",
-    "angular-bootstrap-grid-tree": "cjy37/tree-grid-directive",
-	"angular-schema-form-table": "cjy37/angular-schema-form-table"
+    "angular-bootstrap-grid-tree": "cjy37/tree-grid-directive"
   }
 }
