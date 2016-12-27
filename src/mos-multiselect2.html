@@ -9,8 +9,7 @@
                        refresh="form.refreshData($select.search, form)"
                        refresh-delay="500">
       <div ng-bind-html="tmpitem[form.map.displayProp] | highlight: $select.search"></div>
-      <small ng-if="form.map.moreitemname1">{{tmpitem[form.map.moreitemname1]}}<span ng-if="form.map.moreitemname2">{{tmpitem[form.map.moreitemname2]}}</span>
-      </small>
+      <small ng-if="form.map.moreitemname1"><span ng-bind-html="tmpitem[form.map.moreitemname1]" style="padding-right: 10px;"></span><span ng-if="form.map.moreitemname2" ng-bind-html="tmpitem[form.map.moreitemname2]"></span></small>
     </ui-select-choices>
   </ui-select>
   <div class="help-block" sf-message="form.description"></div>
