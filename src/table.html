@@ -41,7 +41,7 @@
   <div class="table-responsive">
     <table ng-table-dynamic="form.tableParams with form.items"
            template-pagination="customPagination.html"
-           class="table table-condensed table-bordered table-striped table-hover"
+           class="table table-hover"
            ng-init="form.tableParams.settings({dataset: $$value$$ });">
       <tr ng-repeat="row in $data">
         <td ng-repeat="col in $columns" ng-switch="col.type"
