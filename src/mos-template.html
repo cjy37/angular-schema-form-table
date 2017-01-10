@@ -1,4 +1,4 @@
 <div class="{{form.htmlClass}}">
   <label class="{{form.fieldHtmlClass}}" ng-bind-html="form.title"></label>
-  <label class="{{form.labelHtmlClass}}" ng-bind-html="(form.formatterFn?form.formatterFn($$value$$):$$value$$)|unsafe"></label>
+  <label class="{{form.labelHtmlClass}}" ng-bind-html="form.formatterFn?form.formatterFn($$value$$):$$value$$"></label>
 </div>
