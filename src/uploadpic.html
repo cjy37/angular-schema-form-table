@@ -10,7 +10,7 @@
   <br/>
   <a class="btn btn-success" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex, $newFiles, $duplicateFiles, $invalidFiles, $event)"
           ngf-accept="'image/*'"
-          ngf-fix-orientation="true" ngf-capture="'camera'" ngf-validate="form.options.uploadvalidate"
+          ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate"
           ngf-resize="{width: (form.options.resizewidth?form.options.resizewidth:960), quality: 0.8, type: 'image/jpeg'}"
           ngf-resize-if="$width > (form.options.resizewidth?form.options.resizewidth:960) || $height > (form.options.resizewidth?form.options.resizewidth:960)" ng-class="form.class" tabindex="-1">
     <span ng-if="!$file[form.options.resultKey]">上传图片</span>

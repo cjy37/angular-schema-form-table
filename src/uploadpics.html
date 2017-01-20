@@ -16,7 +16,7 @@
   </div>
   <a ngf-multiple="true" class="btn btn-success" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$, $newFiles, $duplicateFiles, $invalidFiles, $event)"
           ngf-accept="'image/*'" ng-init="form.options.init($files, $$value$$);"
-          ngf-fix-orientation="true" ngf-capture="'camera'" ngf-validate="form.options.uploadvalidate"
+          ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate"
           ngf-resize="{width: (form.options.resizewidth?form.options.resizewidth:960), quality: 0.8, type: 'image/jpeg', restoreExif: true}"
           ngf-resize-if="$width > (form.options.resizewidth?form.options.resizewidth:960) || $height > (form.options.resizewidth?form.options.resizewidth:960)" ng-class="form.class" tabindex="-1">
     <span>批量上传</span>
