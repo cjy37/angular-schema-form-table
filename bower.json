@@ -15,7 +15,11 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "templates",
+    "demo.css",
+    "demo.js",
+    "demo.html"
   ],
   "devDependencies": {
     "angular-schema-form": "~0.8.2",
