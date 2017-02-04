@@ -19,7 +19,13 @@
     "templates",
     "demo.css",
     "demo.js",
-    "demo.html"
+    "demo.html",
+    "install_module.cmd",
+    "run_grlp.cmd",
+    "gulpfile.js",
+    "package.json",
+    "README.md",
+    "src"
   ],
   "devDependencies": {
     "angular-schema-form": "~0.8.2",
