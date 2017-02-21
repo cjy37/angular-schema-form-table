@@ -71,6 +71,7 @@
           </div>
         </td>
       </tr>
+      <tr ng-if="$data && $data.length == 0"><td class="schema-table-nodata" ng-attr-colspan="{{$columns.length}}">暂无该类数据</td></tr>
     </table>
   </div>
 
