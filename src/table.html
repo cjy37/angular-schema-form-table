@@ -12,12 +12,12 @@
     </div>
     <div class="columns columns-right btn-group pull-right">
       <button class="btn btn-default" type="button" name="refresh" title="刷新" ng-click="form.tableParams.reload()"><i
-        class="refresh icon"></i></button>
+              class="refresh icon"></i></button>
       <button ng-if="form.showToggle" class="btn btn-default" ng-click="form.toggleView=!form.toggleView" type="button" name="toggle" title="切换"><i
-        class="browser icon"></i></button>
+              class="browser icon"></i></button>
       <div class="keep-open btn-group" title="列">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
-          class="grid layout icon"></i> <span class="caret"></span></button>
+                class="grid layout icon"></i> <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="col in form.items">
             <label><input type="checkbox" ng-model="col.show"> {{col.title}}</label>
@@ -26,7 +26,7 @@
       </div>
       <div class="export btn-group">
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false"><i
-          class="cloud download icon"></i> <span class="caret"></span></button>
+                class="cloud download icon"></i> <span class="caret"></span></button>
         <ul class="dropdown-menu export-table" role="menu">
           <li><a title="excel" href="javascript:void(0)">MS-Excel</a></li>
           <li><a title="csv" href="javascript:void(0)">CSV</a></li>

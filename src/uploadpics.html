@@ -1,16 +1,27 @@
-<div class="upload-buttons form-group schema-form-{{form.type}} {{form.htmlClass}}">
-  <div style="padding-bottom: 10px">
-    <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">{{form.title}}</label>
-    <div class="upload-img-one" ng-repeat="pic in $$value$$ track by $index">
-      <img ng-src="{{pic}}" />
-      <div class="glyphicon glyphicon-remove-sign file-del" ng-click="$$value$$.splice($index, 1)"></div>
-    </div>
-    <div ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true"
-         class="upload-img-one upload-btn" file-button file-change="$$value$$.push(image)"
-         fl-title="剪裁" fl-image-format="image/jpeg">
-      <div class="add-box"></div>
-    </div>
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <br/>
+  <div ng-repeat="f in $$value$$ track by $index">
+    <span ng-if="$files[$index][form.options.errorMsgKey]" class="sr-only">错误: {{$files[$index][form.options.errorMsgKey]}}</span>
+    <a ng-if="form.options.showThumb" href="{{f}}" target="_blank">
+      <img ngf-src="f" height="{{form.options.thumbSize}}px"
+           width="{{form.options.thumbSize}}px" style="margin-bottom: 2px" class="thumb"/>
+    </a>
+    <span class="file-progress" ng-show="$files[$index][form.options.progressKey] >= 0">
+        <div style="width:{{$files[$index][form.options.progressKey]}}%" ng-bind="$files[$index][form.options.progressKey] + '%'"></div>
+    </span>
+    <div ng-show="f" class="glyphicon glyphicon-remove-sign file-del"
+         ng-click="form.options.deleteFn($$value$$, f)"></div>
   </div>
-  <span ng-if="form.options.width">建议尺寸：{{form.options.width}}*{{form.options.height}}</span>
+  <a ngf-multiple="true" class="btn btn-success" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$, $newFiles, $duplicateFiles, $invalidFiles, $event)"
+     ng-init="form.options.init($files, $$value$$);"
+     ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate"
+     ngf-resize="{width: (form.options.resizewidth?form.options.resizewidth:960), quality: 0.8, type: 'image/jpeg', restoreExif: true}"
+     ngf-resize-if="$width > (form.options.resizewidth?form.options.resizewidth:960) || $height > (form.options.resizewidth?form.options.resizewidth:960)" ng-class="form.class" tabindex="-1">
+    <span>批量上传</span>
+  </a>
+  <br ng-if="form.options.suggestBottom" />
+  <span ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span>
   <div class="help-block" sf-message="form.description"></div>
 </div>
