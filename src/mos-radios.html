@@ -1,15 +1,10 @@
 <div class="form-group schema-form-radiobuttons {{form.htmlClass}}"
      ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
-  <div>
-    <label class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
-  </div>
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
   <div class="joininputcol">
-  <div class="btn-group">
-    <label class="btn {{ (item.value === $$value$$) ? form.style.selected || 'btn-default' : form.style.unselected || 'btn-default'; }}"
-           ng-class="{ active: item.value === $$value$$ }"
-           ng-repeat="item in form.titleMap">
+  <div class="radio" class="{{form.fieldHtmlClass}}">
+    <label class="join-radio" ng-repeat="item in form.titleMap">
       <input type="radio"
-             class="{{form.fieldHtmlClass}}"
              sf-changed="form"
              style="display: none;"
              ng-disabled="form.readonly"
@@ -18,7 +13,10 @@
              schema-validate="form"
              ng-value="item.value"
              name="{{form.key.join('.')}}">
+      <span ng-class="{'icon-activities_icon_Radio': item.value === $$value$$, 'icon-activities_icon_Radio_nor': item.value !== $$value$$}"></span>
       <span ng-bind-html="item.name"></span>
+      <span ng-if="item.label" class="join-radio-label" ng-bind-html="item.label"></span>
     </label>
+    <span ng-if="form.suggestlabel" ng-bind-html="form.suggestlabel"></span>
   </div><div class="help-block" sf-message="form.description"></div></div>
 </div>

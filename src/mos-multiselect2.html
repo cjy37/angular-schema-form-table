@@ -1,8 +1,9 @@
 <!--http://dotansimha.github.io/angularjs-dropdown-multiselect/#/-->
 <div class="form-group {{form.htmlClass}} schema-form-select"
-     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
-  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
-  <ui-select multiple ng-model="$$value$$" theme="select2" ng-disabled="{{form.readonly}}"
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
+  <label ng-if="!form.notitle" class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol">
+    <div ng-if="form.addDataOption" class="input-group"><ui-select multiple ng-model="$$value$$" theme="select2" ng-disabled="{{form.readonly}}"
              class="{{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">
     <ui-select-match placeholder="{{form.placeholder}}">{{$item[form.map.displayProp]}}</ui-select-match>
     <ui-select-choices repeat="tmpitem in form.titleMap | propsFilter: form.filter1($select.search)"
@@ -12,5 +13,19 @@
       <small ng-if="form.map.moreitemname1"><span ng-bind-html="tmpitem[form.map.moreitemname1]" style="padding-right: 10px;"></span><span ng-if="form.map.moreitemname2" ng-bind-html="tmpitem[form.map.moreitemname2]"></span></small>
     </ui-select-choices>
   </ui-select>
+  <span class="input-group-btn"><button class="btn" ng-class="form.addDataOption.class" type="button" ng-click="form.addDataOption.cb($event,form)"><span class="icon-activities_icon_add" style="padding-right:5px;" ng-if="!form.addDataOption.title"></span>{{form.addDataOption.title||'新增'}}</button>
+  </span></div>
+  <ui-select ng-if="!form.addDataOption" multiple ng-model="$$value$$" theme="select2" ng-disabled="{{form.readonly}}"
+               class="joininputcol {{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">
+      <ui-select-match placeholder="{{form.placeholder}}">{{$item[form.map.displayProp]}}</ui-select-match>
+      <ui-select-choices repeat="tmpitem in form.titleMap | propsFilter: form.filter1($select.search)"
+                         refresh="form.refreshData($select.search, form)"
+                         refresh-delay="500">
+        <div ng-bind-html="tmpitem[form.map.displayProp] | highlight: $select.search"></div>
+        <small ng-if="form.map.moreitemname1"><span ng-bind-html="tmpitem[form.map.moreitemname1]" style="padding-right: 10px;"></span><span ng-if="form.map.moreitemname2" ng-bind-html="tmpitem[form.map.moreitemname2]"></span></small>
+      </ui-select-choices>
+    </ui-select>
   <div class="help-block" sf-message="form.description"></div>
+  </div>
+
 </div>

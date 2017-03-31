@@ -1,8 +1,8 @@
 <!--http://dotansimha.github.io/angularjs-dropdown-multiselect/#/-->
 <div class="form-group {{form.htmlClass}} schema-form-select"
-     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
-  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
-  <select ng-model="$$value$$"
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol"><select ng-model="$$value$$"
           ng-model-options="form.ngModelOptions"
           sf-changed="form"
           ng-disabled="{{form.readonly}}"
@@ -11,6 +11,5 @@
           ng-options="item[form.map.value || 'value'] as item[form.map.name || 'name'] group by item.group for item in form.titleMap"
           name="{{form.key.slice(-1)[0]}}">
     <option value="">{{form.placeholder||'请选择...'}}</option>
-  </select>
-  <div class="help-block" sf-message="form.description"></div>
+  </select><div class="help-block" sf-message="form.description"></div></div>
 </div>

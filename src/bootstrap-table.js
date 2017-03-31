@@ -158,6 +158,26 @@
       base + 'mos-color.html'
     );
 
+      //mos-textarea
+      var mostextarea = function(name, schema, options) {
+          if (schema.format === 'mos-textarea') {
+              var f = schemaFormProvider.stdFormObj(name, schema, options);
+              f.key  = options.path;
+              f.type = 'mos-textarea';
+              options.lookup[sfPathProvider.stringify(options.path)] = f;
+              return f;
+          }
+      };
+      schemaFormProvider.defaults.string.unshift(mostextarea);
+      schemaFormDecoratorsProvider.addMapping(
+          'bootstrapDecorator',
+          'mos-textarea',
+          base + 'mos-textarea.html'
+      );
+      schemaFormDecoratorsProvider.createDirective(
+          'mos-textarea',
+          base + 'mos-textarea.html'
+      );
     //MOSSelect2
     var mosselect2 = function(name, schema, options) {
       if (schema.format === 'mos-select2') {
@@ -263,6 +283,47 @@
       base + 'uploadpics.html'
     );
 
+      //cutUploadPic
+      var cutuploadpic = function(name, schema, options) {
+          if (schema.format === 'cutuploadpic') {
+              var f = schemaFormProvider.stdFormObj(name, schema, options);
+              f.key  = options.path;
+              f.type = 'cutuploadpic';
+              options.lookup[sfPathProvider.stringify(options.path)] = f;
+              return f;
+          }
+      };
+      schemaFormProvider.defaults.string.unshift(cutuploadpic);
+      schemaFormDecoratorsProvider.addMapping(
+          'bootstrapDecorator',
+          'cutuploadpic',
+          base + 'cutuploadpic.html'
+      );
+      schemaFormDecoratorsProvider.createDirective(
+          'cutuploadpic',
+          base + 'cutuploadpic.html'
+      );
+
+      //cutUploadPics
+      var cutuploadpics = function(name, schema, options) {
+          if (schema.format === 'cutuploadpics') {
+              var f = schemaFormProvider.stdFormObj(name, schema, options);
+              f.key  = options.path;
+              f.type = 'cutuploadpics';
+              options.lookup[sfPathProvider.stringify(options.path)] = f;
+              return f;
+          }
+      };
+      schemaFormProvider.defaults.string.unshift(cutuploadpics);
+      schemaFormDecoratorsProvider.addMapping(
+          'bootstrapDecorator',
+          'cutuploadpics',
+          base + 'cutuploadpics.html'
+      );
+      schemaFormDecoratorsProvider.createDirective(
+          'cutuploadpics',
+          base + 'cutuploadpics.html'
+      );
     //uploadfile
     var uploadfile = function(name, schema, options) {
       if (schema.format === 'uploadfile') {
@@ -469,25 +530,48 @@
       'mos-tree-grid',
       base + 'mos-tree-grid.html'
     );
+    //mos-radios
+    var mosradios = function(name, schema, options) {
+        if (schema.format === 'mos-radios') {
+            var f = schemaFormProvider.stdFormObj(name, schema, options);
+            f.key  = options.path;
+            f.type = 'mos-radios';
+            options.lookup[sfPathProvider.stringify(options.path)] = f;
+            return f;
+        }
+    };
+    schemaFormProvider.defaults.string.unshift(mosradios);
+    schemaFormDecoratorsProvider.addMapping(
+        'bootstrapDecorator',
+        'mos-radios',
+        base + 'mos-radios.html'
+    );
+    schemaFormDecoratorsProvider.createDirective(
+        'mos-radios',
+        base + 'mos-radios.html'
+    );
 
     schemaFormDecoratorsProvider.createDirectives({
-      number : base + 'mos-default.html',//数字组件
-      text : base + 'mos-default.html',//默认，文本组件
-      date : base + 'mos-default.html',//日期组件
-      password : base + 'mos-default.html',//密码组件
-      input : base + 'mos-default.html',//默认，文本组件
+      'mos-number' : base + 'mos-default.html',//数字组件
+      'text' : base + 'mos-default.html',//默认，文本组件
+      'date' : base + 'mos-default.html',//日期组件
+      'password' : base + 'mos-default.html',//密码组件
+      'input' : base + 'mos-default.html',//默认，文本组件
       'multi-select' : base + 'mos-multiselect.html',//多选组件
       'table-title' : base + 'table-title.html',//表头组件
-      table : base + 'table.html',//表格组件
+      'table' : base + 'table.html',//表格组件
       'button-group' : base + 'mos-button-group.html',//按钮组组件
       'mos-array' : base + 'mos-array.html',//数据显示组件
       'mos-color' : base + 'mos-color.html',//颜色选择组件
+      'mos-textarea' : base + 'mos-textarea.html',//对许框文字输入选择组件
       'mos-commit-info' : base + 'mos-commit-info.html',//自定义提交资料
       'mos-select2' : base + 'mos-select2.html',//选择组件v2
       'mos-multiselect2' : base + 'mos-multiselect2.html',//多选组件v2
       'mos-template' : base + 'mos-template.html',//文本显示模板
       'uploadpic' : base + 'uploadpic.html',//上传组件
       'uploadpics' : base + 'uploadpics.html',//多文件上传组
+      'cutuploadpic' : base + 'cutuploadpic.html',//上传组件
+      'cutuploadpics' : base + 'cutuploadpics.html',//多文件上传组
       'uploadfile' : base + 'uploadfile.html',//上传文件组件
       'uploadfiles' : base + 'uploadfiles.html',//多文件上传组件
       'ckeditor' : base + 'ckeditor.html',
@@ -497,8 +581,8 @@
       'mos-radio-buttons' : base + 'mos-radio-buttons.html',
       'mos-tree-grid' : base + 'mos-tree-grid.html',
       'popoverUser' : base + 'popover-user.html',//用户选择弹出件
-      'mos-tree-grid' : base + 'mos-tree-grid.html',
-      label : base + 'mos-default.html'//表单标题组件
+      'mos-radios' : base + 'mos-radios.html',
+      'label' : base + 'mos-default.html'//表单标题组件
     });
 
   }

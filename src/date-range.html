@@ -1,7 +1,7 @@
 <div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
-     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
-  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
-  <div ng-class="{'input-group': (form.fieldAddonLeft || form.fieldAddonRight)}">
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
+  <label class="control-label {{form.labelHtmlClass}}"  ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol {{form.fieldHtmlClass}}" ng-class="{'input-group': (form.fieldAddonLeft || form.fieldAddonRight)}">
     <input
       type="daterange"
       id="{{form.key.slice(-1)[0]}}"
@@ -24,15 +24,13 @@
       aria-describedby="{{form.key.slice(-1)[0] + 'Status'}}"/>
     <span ng-if="form.fieldAddonRight && form.fieldAddonRight.type!='button'"
           class="input-group-addon  {{form.fieldAddonRight.htmlClass}}"> </span>
+    <span ng-if="form.feedback !== false"
+          class="form-control-feedback"
+          ng-class="evalInScope(form.feedback) || {'glyphicon': true, 'glyphicon-ok': hasSuccess(), 'glyphicon-remove': hasError() }"
+          aria-hidden="true"></span>
+    <span ng-if="hasError() || hasSuccess()"
+          id="{{form.key.slice(-1)[0] + 'Status'}}"
+          class="sr-only">{{ hasSuccess() ? '(success)' : '(error)' }}</span>
+    <div class="help-block" sf-message="form.description"></div>
   </div>
-  <span ng-if="form.feedback !== false"
-        class="form-control-feedback"
-        ng-class="evalInScope(form.feedback) || {'glyphicon': true, 'glyphicon-ok': hasSuccess(), 'glyphicon-remove': hasError() }"
-        aria-hidden="true"></span>
-
-  <span ng-if="hasError() || hasSuccess()"
-        id="{{form.key.slice(-1)[0] + 'Status'}}"
-        class="sr-only">{{ hasSuccess() ? '(success)' : '(error)' }}</span>
-
-  <div class="help-block" sf-message="form.description"></div>
 </div>

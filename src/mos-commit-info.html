@@ -1,6 +1,6 @@
 <div class="form-group {{form.htmlClass}}">
   <label class="control-label" ng-bind-html="form.title + '：'"></label>
-  <div class="list-group-item">
+  <div class="joininputcol"><div class="list-group-item">
     <span ng-bind-html="JSON.stringify($$value$$)"></span>
     <div class="form-group {{form.fieldHtmlClass}} schema-form-string" ng-repeat="item in $$value$$" ng-model="$$value$$">
       <span ng-if="item.isRequire" style="color: red;">*&nbsp;</span><label class="control-label" ng-bind-html="item.sciTitle + '：'"></label>
@@ -40,5 +40,5 @@
       </div>
       <textarea ng-if="item.sciType && item.sciType.value == 4" ng-disabled="form.readonly"  ng-model="item.srciValue" class="form-control"></textarea>
     </div>
-  </div>
+  </div></div>
 </div>

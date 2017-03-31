@@ -1,7 +1,7 @@
 <div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
-     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
-  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
-  <br/>
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol" ng-class="form.fieldHtmlClass">
   <a ng-if="form.options.showThumb" href="{{$$value$$}}" target="_blank">
     <img ng-if="form.options.showThumb" ngf-src="$$value$$"
          height="{{form.options.thumbSize}}"
@@ -24,4 +24,4 @@
   <span ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span>
   <span ng-if="$file[form.options.errorMsgKey]" class="sr-only">错误: {{$file[form.options.errorMsgKey]}}</span>
   <div class="help-block" sf-message="form.description"></div>
-</div>
+</div></div>

@@ -2,23 +2,15 @@
      ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
   <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
   <div class="joininputcol">
-    <input ng-if="!form.fieldAddonLeft && !form.fieldAddonRight"
-           ng-show="form.key && form.type!='label'"
-           type="{{form.type.replace('mos-','')}}"
-           step="any"
-           sf-changed="form"
-           placeholder="{{form.placeholder}}"
-           class="form-control {{form.fieldHtmlClass}}"
-           id="{{form.key.slice(-1)[0]}}"
-           ng-model-options="form.ngModelOptions"
-           ng-model="$$value$$"
-           ng-disabled="{{form.readonly}}"
-           schema-validate="form"
-           name="{{form.key.slice(-1)[0]}}"
-           aria-describedby="{{form.key.slice(-1)[0] + 'Status'}}">
-
-    <span ng-if="!form.fieldAddonLeft && !form.fieldAddonRight" class="form-control {{form.fieldHtmlClass}}"
-          ng-show="form.key && form.type=='label'">{{$$value$$}}</span>
+    <textarea sf-changed="form"
+              placeholder="{{form.placeholder}}"
+              class="form-control {{form.fieldHtmlClass}}"
+              id="{{form.key.slice(-1)[0]}}"
+              ng-model-options="form.ngModelOptions"
+              ng-model="$$value$$"
+              ng-disabled="{{form.readonly}}"
+              schema-validate="form"
+              name="{{form.key.slice(-1)[0]}}"></textarea>
 
     <div ng-if="form.fieldAddonLeft || form.fieldAddonRight" ng-class="{'input-group': (form.fieldAddonLeft || form.fieldAddonRight)}">
 
@@ -29,11 +21,7 @@
       <span ng-if="form.fieldAddonLeft && form.fieldAddonLeft.hasOwnProperty('type')" class="input-group-btn" ng-init="form.fieldAddonLeft['htmlClass']='input-group-btn'">
         <sf-decorator form="form.fieldAddonLeft"></sf-decorator>
       </span>
-
-      <input ng-show="form.key && form.type!='label'"
-             type="{{form.type.replace('mos-','')}}"
-             step="any"
-             sf-changed="form"
+      <textarea sf-changed="form"
              placeholder="{{form.placeholder}}"
              class="form-control {{form.fieldHtmlClass}}"
              id="{{form.key.slice(-1)[0]}}"
@@ -41,12 +29,7 @@
              ng-model="$$value$$"
              ng-disabled="{{form.readonly}}"
              schema-validate="form"
-             name="{{form.key.slice(-1)[0]}}"
-             aria-describedby="{{form.key.slice(-1)[0] + 'Status'}}">
-
-      <span class="form-control {{form.fieldHtmlClass}}"
-            ng-show="form.key && form.type=='label'">{{$$value$$}}</span>
-
+             name="{{form.key.slice(-1)[0]}}"></textarea>
 
       <span ng-if="form.fieldAddonRight && !form.fieldAddonRight.hasOwnProperty('type')"
             class="input-group-addon  {{form.fieldAddonRight.htmlClass}}"

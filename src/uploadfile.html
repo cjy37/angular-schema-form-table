@@ -1,10 +1,9 @@
 <div class="form-group schema-form-{{form.type}} {{form.htmlClass}}"
-     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'">
-  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
-  <br/>
-  <a ng-if="form.options.showThumb" href="{{$$value$$}}" target="_blank">{{$$value$$.substring($$value$$.lastIndexOf('/')+1)}}</a>
-  <br/>
-  <a class="btn btn-success" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex)"
+     ng-init="form.options.resultKey='url' ; form.options.progressKey='progress' ; form.options.errorMsgKey='errorMsg'" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol" ng-class="form.fieldHtmlClass">
+  <div class="uploadfilebody"><a class="uploadfilecls" ng-if="form.options.showThumb" href="{{$$value$$}}" target="_blank">{{$$value$$.substring($$value$$.lastIndexOf('/')+1)}}</a>
+  <a class="btn btn-success uploadfilebuttom" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex)"
           ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate?form.options.uploadvalidate:{size: {max: '20MB', min: '10B'}}" ng-class="form.class" tabindex="-1">
     <span ng-if="!$file[form.options.resultKey]">上传文件</span>
     <span class="file-progress" ng-if="!$file[form.options.resultKey]"
@@ -15,7 +14,7 @@
     <span ng-show="$file[form.options.resultKey]">上传成功</span>
   </a>
   <br ng-if="form.options.suggestBottom" />
-  <span ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span>
+  <span class="uploadfilelabel" ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span></div>
   <span ng-if="$file[form.options.errorMsgKey]" class="sr-only">错误: {{$file[form.options.errorMsgKey]}}</span>
-  <div class="help-block" sf-message="form.description"></div>
+  <div class="help-block" sf-message="form.description"></div></div>
 </div>

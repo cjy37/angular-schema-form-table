@@ -1,13 +1,12 @@
 <!--http://dotansimha.github.io/angularjs-dropdown-multiselect/#/-->
 <div class="form-group {{form.htmlClass}} schema-form-select"
-     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
-  <label class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-bind-html="form.title"></label>
-  <input colorpicker type="text"
+     ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
+  <div class="joininputcol"><input colorpicker type="text"
          sf-changed="form"
          placeholder="{{form.placeholder}}"
          class="form-control {{form.fieldHtmlClass}}"
          ng-model="$$value$$"
          ng-disabled="{{form.readonly}}"
-         schema-validate="form" >
-  <div class="help-block" sf-message="form.description"></div>
+         schema-validate="form" ><div class="help-block" sf-message="form.description"></div></div>
 </div>

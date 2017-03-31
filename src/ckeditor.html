@@ -1,5 +1,7 @@
-<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
-  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
-  <div ckeditor="form.options" ng-model="$$value$$" ready="form.onReady()" schema-validate="form"></div>
-  <div class="help-block" sf-message="form.description"></div>
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <div class="joininputcol">
+    <div ng-class="form.fieldHtmlClass" ckeditor="form.options" ng-model="$$value$$" ready="form.onReady()" schema-validate="form"></div>
+    <div class="help-block" sf-message="form.description"></div>
+  </div>
 </div>
