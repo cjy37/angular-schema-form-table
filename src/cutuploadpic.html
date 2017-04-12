@@ -1,7 +1,7 @@
 <div class="upload-button form-group schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
     <div class="joininputcol" ng-class="form.fieldHtmlClass">
-      <div class="uploadimgbody"><div ng-style="{'background':'url('+$$value$$+') left top / contain no-repeat'}" class="uploadimgcls"></div></div><div class="uploadimgcontent">
+      <div class="uploadimgbody"><div ng-style="{'background':'url('+($$value$$|formatImgUrl:form.options.suffix)+') left top / 100% 100% no-repeat'}" class="uploadimgcls"></div></div><div class="uploadimgcontent">
       <div class="uploadimgbuttom" file-button file-change="$$value$$=image" fl-title="剪裁"
            fl-image-format="image/jpeg" fl-aspect-ratio="1">
         <span class='btn {{form.btnHtmlClass || "btn-success"}}'>{{form.btn_title || '选择图片'}}</span>

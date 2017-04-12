@@ -2,7 +2,7 @@
   <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
   <div class="joininputcol" ng-class="form.fieldHtmlClass">
     <div class="upload-img-one" ng-repeat="pic in $$value$$ track by $index">
-      <div ng-style="{'background':'url('+pic+') left top / contain no-repeat'}" class="uploadimgscls"></div>
+      <div ng-style="{'background':'url('+(pic|formatImgUrl:form.options.suffix)+') left top / 100% 100% no-repeat'}" class="uploadimgscls"></div>
       <div class="glyphicon glyphicon-remove-sign file-del" ng-click="$$value$$.splice($index, 1)"></div>
     </div>
     <div class="uploadimgscontent"><div class="uploadimgsbuttom" ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true"

@@ -22,7 +22,7 @@
           class="grid layout icon"></i> <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="col in form.items">
-            <label><input type="checkbox" ng-model="col.show"> {{col.title}}</label>
+			<label class="col-checkbox-label" ng-class="{'icon-home_Screen_hook active': col.show}"><input type="checkbox" ng-model="col.show"></label><span> {{col.title}}</span>
           </li>
         </ul>
       </div>
