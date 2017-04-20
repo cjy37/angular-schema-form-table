@@ -220,6 +220,48 @@
       base + 'mos-multiselect2.html'
     );
 
+    //MOSTreeSelect2
+    var mostreeselect2 = function(name, schema, options) {
+      if (schema.format === 'mos-treeselect2') {
+        var f = schemaFormProvider.stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'mos-treeselect2';
+        options.lookup[sfPathProvider.stringify(options.path)] = f;
+        return f;
+      }
+    };
+    schemaFormProvider.defaults.string.unshift(mostreeselect2);
+    schemaFormDecoratorsProvider.addMapping(
+      'bootstrapDecorator',
+      'mos-treeselect2',
+      base + 'mos-treeselect2.html'
+    );
+    schemaFormDecoratorsProvider.createDirective(
+      'mos-treeselect2',
+      base + 'mos-treeselect2.html'
+    );
+
+    //MOS-treeMultiselect2
+    var mostreemultiselect2 = function(name, schema, options) {
+      if (schema.format === 'mos-treemultiselect2') {
+        var f = schemaFormProvider.stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'mos-treemultiselect2';
+        options.lookup[sfPathProvider.stringify(options.path)] = f;
+        return f;
+      }
+    };
+    schemaFormProvider.defaults.string.unshift(mostreemultiselect2);
+    schemaFormDecoratorsProvider.addMapping(
+      'bootstrapDecorator',
+      'mos-treemultiselect2',
+      base + 'mos-treemultiselect2.html'
+    );
+    schemaFormDecoratorsProvider.createDirective(
+      'mos-treemultiselect2',
+      base + 'mos-treemultiselect2.html'
+    );
+	
     var mostemplate = function(name, schema, options) {
       if (schema.format === 'mos-template') {
         var f = schemaFormProvider.stdFormObj(name, schema, options);
@@ -567,6 +609,8 @@
       'mos-commit-info' : base + 'mos-commit-info.html',//自定义提交资料
       'mos-select2' : base + 'mos-select2.html',//选择组件v2
       'mos-multiselect2' : base + 'mos-multiselect2.html',//多选组件v2
+      'mos-treeselect2' : base + 'mos-treeselect2.html',//选择树形组件v2
+      'mos-treemultiselect2' : base + 'mos-treemultiselect2.html',//多选树形组件v2
       'mos-template' : base + 'mos-template.html',//文本显示模板
       'uploadpic' : base + 'uploadpic.html',//上传组件
       'uploadpics' : base + 'uploadpics.html',//多文件上传组

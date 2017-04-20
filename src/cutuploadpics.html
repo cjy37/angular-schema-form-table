@@ -3,7 +3,7 @@
   <div class="joininputcol" ng-class="form.fieldHtmlClass">
     <div class="upload-img-one" ng-repeat="pic in $$value$$ track by $index">
       <div ng-style="{'background':'url('+(pic|formatImgUrl:form.options.suffix)+') left top / 100% 100% no-repeat'}" class="uploadimgscls"></div>
-      <div class="glyphicon glyphicon-remove-sign file-del" ng-click="$$value$$.splice($index, 1)"></div>
+      <div class="icon-activities_icon_close file-del" ng-click="$$value$$.splice($index, 1)"></div>
     </div>
     <div class="uploadimgscontent"><div class="uploadimgsbuttom" ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true"
          class="upload-img-one upload-btn" file-button file-change="$$value$$.push(image)"
