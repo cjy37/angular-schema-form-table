@@ -1,7 +1,7 @@
 <div class="form-group {{form.htmlClass}} schema-form-treemultiselect"
      ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
   <label ng-if="!form.notitle" class="control-label {{form.labelHtmlClass}}" ng-class="{'schema-form-required': form.inputrequired === true}" ng-show="showTitle()">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
-  <div class="joininputcol ui-select-container ui-select-multiple select2 select2-container select2-container-multi" ng-model="$$value$$" ng-href="" ng-click="form.openSelect()" schema-validate="form" sf-changed="form">
+  <div class="joininputcol ui-select-container ui-select-multiple select2 select2-container select2-container-multi" ng-model="$$value$$" ng-href="" ng-click="form.openSelect($event, form)" schema-validate="form" sf-changed="form">
     <div ng-if="form.addDataOption" class="input-group"><ul class="select2-choices">
       <li class="select2-search-field" ng-if="!$$value$$ || $$value$$.length == 0"><input type="text"  class="select2-input ui-select-search ng-pristine" readonly="readonly" placeholder="{{form.placeholder}}"></li>
 			<li class="ui-select-match-item select2-search-choice" ng-repeat="item in $$value$$">

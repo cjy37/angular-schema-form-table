@@ -1,7 +1,7 @@
 <div class="form-group {{form.htmlClass}} schema-form-treeselect"
      ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
   <label ng-if="!form.notitle" class="control-label {{form.labelHtmlClass}}" ng-show="showTitle()" ng-class="{'schema-form-required': form.inputrequired === true}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
-  <div class="joininputcol ui-select-container ui-select-bootstrap dropdown" ng-href="" ng-click="form.openSelect()" ng-model="$$value$$" schema-validate="form" sf-changed="form"><div ng-if="form.addDataOption" class="input-group"><div class="ui-select-match" ng-class="form.fieldHtmlClass">
+  <div class="joininputcol ui-select-container ui-select-bootstrap dropdown" ng-href="" ng-click="form.openSelect($event, form)" ng-model="$$value$$" schema-validate="form" sf-changed="form"><div ng-if="form.addDataOption" class="input-group"><div class="ui-select-match" ng-class="form.fieldHtmlClass">
     <span tabindex="-1" class="btn btn-default form-control ui-select-toggle" style="outline: 0;">
       <span class="ui-select-match-text pull-left"><div ng-bind-html="($$value$$?$$value$$[form.map.displayProp]:'') || form.placeholder"></div>
           <small ng-if="$$value$$ && form.map.moreitemname1" ng-bind="$$value$$[form.map.moreitemname1]" style="padding-right: 10px;" ng-bind="item.uoiId.shortName"></small>
