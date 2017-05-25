@@ -57,6 +57,12 @@
             <a href="javascript:;" ng-click="col.action(this, row)"
                ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></a>
           </div>
+		  <div ng-switch-when="input" ng-class="col.fieldClass">
+			<input type="{{col.inputType}}" ng-model="row[col.field]" />
+          </div>
+		  <div ng-switch-when="template" ng-class="col.fieldClass">
+			<div ng-include="col.templateUrl"></div>
+          </div>
           <button ng-switch-when="button" type="button" class="btn" ng-class="col.fieldClass"
                   ng-click="col.action(this, row)">
             <span ng-if="col.iconClass" class="glyphicon" ng-class="col.iconClass"></span>
