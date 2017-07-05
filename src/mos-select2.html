@@ -7,7 +7,7 @@
              reset-search-input="false"
              class="{{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">
     <ui-select-match placeholder="{{form.placeholder}}">{{$select.selected[form.map.displayProp]}}</ui-select-match>
-    <ui-select-choices repeat="tmpitem in form.titleMap track by $index"
+    <ui-select-choices repeat="tmpitem in form.titleMap | propsFilter: form.filter1($select.search) track by $index"
                        refresh="form.refreshData($select.search, form)"
                        refresh-delay="500">
       <div ng-bind-html="tmpitem[form.map.displayProp] | highlight: $select.search"></div>
@@ -21,7 +21,7 @@
                reset-search-input="false"
                class="joininputcol {{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">
       <ui-select-match placeholder="{{form.placeholder}}">{{$select.selected[form.map.displayProp]}}</ui-select-match>
-      <ui-select-choices repeat="tmpitem in form.titleMap track by $index"
+      <ui-select-choices repeat="tmpitem in form.titleMap | propsFilter: form.filter1($select.search) track by $index"
                          refresh="form.refreshData($select.search, form)"
                          refresh-delay="500">
         <div ng-bind-html="tmpitem[form.map.displayProp] | highlight: $select.search"></div>
