@@ -5,30 +5,30 @@
   <div class="ng-table-toolbar" ng-if="!form.hideTopToggle">
     <div id="toolbar_btnoption_list" class="pull-left btn-group ng-scope">
 	    <div class="btnlist-inner">
-		    <button ng-repeat="btn in form.toolbar" class="btn btn-default" ng-class="btn.htmlClass" type="button"
-		            ng-if="btn.condition ? btn.condition() : true"
-		            ng-click="btn.action();">
+        <md-button ng-repeat="btn in form.toolbar" class="btn btn-default" 
+            ng-class="btn.htmlClass" 
+            ng-if="btn.condition ? btn.condition() : true"
+		        ng-click="btn.action();">
 			    <i ng-if="btn.icon" ng-class="btn.icon"></i> <span>{{btn.name}}</span>
-		    </button>
+        </md-button>
 	    </div>
     </div>
     <div class="columns columns-right btn-group pull-right">
-      <button class="btn btn-default" type="button" name="refresh" title="刷新" ng-click="form.tableParams.reload()"><i
-        class="refresh icon"></i></button>
-      <button ng-if="form.showToggle" class="btn btn-default" ng-click="form.toggleView=!form.toggleView" type="button" name="toggle" title="切换"><i
-        class="browser icon"></i></button>
+      <md-button class="btn btn-default" name="refresh" title="刷新" ng-click="form.tableParams.reload()"><i
+        class="refresh icon"></i></md-button>
+      <md-button ng-if="form.showToggle" class="btn btn-default" ng-click="form.toggleView=!form.toggleView" name="toggle" title="切换"><i
+        class="browser icon"></i></md-button>
       <div class="keep-open btn-group" title="列">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
-          class="grid layout icon"></i> <span class="caret"></span></button>
+        <md-button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
+          class="grid layout icon"></i> <span class="caret"></span></md-button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="col in form.items">
-			<label class="col-checkbox-label" ng-class="{'icon-home_Screen_hook active': col.show}"><input type="checkbox" ng-model="col.show"></label><span> {{col.title}}</span>
+			      <md-checkbox type="checkbox" ng-model="col.show">{{col.title}}</md-checkbox>
           </li>
         </ul>
       </div>
       <div class="export btn-group">
-        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false"><i
-          class="cloud download icon"></i> <span class="caret"></span></button>
+        <md-button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="cloud download icon"></i> <span class="caret"></span></md-button>
         <ul class="dropdown-menu export-table" role="menu">
           <li><a title="excel" href="javascript:void(0)">MS-Excel</a></li>
           <li><a title="csv" href="javascript:void(0)">CSV</a></li>
@@ -61,19 +61,19 @@
 			<input type="{{col.inputType}}" ng-model="row[col.field]" />
           </div>
 		  <div ng-switch-when="template" ng-class="col.fieldClass">
-			<div ng-include="col.templateUrl"></div>
-          </div>
-          <button ng-switch-when="button" type="button" class="btn" ng-class="col.fieldClass"
-                  ng-click="col.action(this, row)">
-            <span ng-if="col.iconClass" class="glyphicon" ng-class="col.iconClass"></span>
-            <span ng-bind-html="col.text"></span>
-          </button>
+			  <div ng-include="col.templateUrl"></div>
+      </div>
+      <div ng-switch-when="button">
+        <md-button md-colors="{background:'{{col.fieldClass}}'}" ng-click="col.action(this, row)">
+          <span ng-if="col.iconClass" class="glyphicon" ng-class="col.iconClass"></span>
+          <span ng-bind-html="col.text"></span>
+        </md-button>
+      </div>
           <div ng-switch-when="buttons" ng-class="col.fieldClass">
-            <button ng-repeat="colBtn in col.items" type="button" class="btn" ng-class="colBtn.fieldClass"
-                    ng-click="colBtn.action(this, row)">
+            <md-button ng-repeat="colBtn in col.items" md-colors="{background:'{{colBtn.fieldClass}}'}" ng-click="colBtn.action(this, row)">
               <span ng-if="colBtn.iconClass" class="glyphicon" ng-class="colBtn.iconClass"></span>
               <span ng-bind-html="colBtn.text"></span>
-            </button>
+            </md-button>
           </div>
           <div ng-switch-default>
             该列类型未开发。。。<!--<sf-decorator ng-model="row" form="col"></sf-decorator>-->

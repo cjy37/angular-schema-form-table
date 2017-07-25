@@ -11,10 +11,10 @@
     <div ng-show="f" class="icon-activities_icon_close file-del"
          ng-click="form.options.deleteFn($$value$$, f)"></div>
   </div>
-  <a ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true" ngf-multiple="true" class="btn btn-success uploadfilesbuttom" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$)"
+  <md-button md-colors="{background: 'green'}" ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true" ngf-multiple="true" class="uploadfilesbuttom" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$)"
           ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate?form.options.uploadvalidate:{size: {max: '20MB', min: '10B'}}" ng-class="form.class" tabindex="-1">
     <span>批量上传</span>
-  </a>
+  </md-button>
   <br ng-if="form.options.suggestBottom" />
   <span class="uploadfileslabel" ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span></div>
   <div class="help-block" sf-message="form.description"></div></div>

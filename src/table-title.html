@@ -1,10 +1,10 @@
 <div sf-array="form" class="form-group {{form.htmlClass}}" style="clear: both"
      ng-model="$$value$$" ng-model-options="form.ngModelOptions">
-  <button ng-click="form.add()" type="button" class="btn btn-success pull-right" style="margin-bottom:20px;margin-left: 10px" ng-init="(!$$value$$ || $$value$$.length == 0 ) && form.add()">
+  <md-button md-colors="{background: 'green'}" ng-click="form.add()" class="pull-right" style="margin-bottom:20px;margin-left: 10px" ng-init="(!$$value$$ || $$value$$.length == 0 ) && form.add()">
     <i class="glyphicon glyphicon-plus"></i> 增加{{form.title}}
-  </button>
-  <button ng-show="form.actionTitle" ng-click="form.action()" type="button" class="btn btn-success pull-right" style="margin-bottom:20px">
+  </md-button>
+  <md-button md-colors="{background: 'green'}" ng-show="form.actionTitle" ng-click="form.action()" class="pull-right" style="margin-bottom:20px">
     {{form.actionTitle}} <i class="glyphicon glyphicon-chevron-right"></i>
-  </button>
+  </md-button>
   <h3>{{form.title}}</h3>
 </div>

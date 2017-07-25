@@ -3,7 +3,7 @@
   <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
   <div class="joininputcol" ng-class="form.fieldHtmlClass">
   <div class="uploadfilebody"><a class="uploadfilecls" ng-if="form.options.showThumb" href="{{$$value$$}}" target="_blank">{{$$value$$.substring($$value$$.lastIndexOf('/')+1)}}</a>
-  <a class="btn btn-success uploadfilebuttom" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex)"
+  <md-button md-colors="{background: 'green'}" class="uploadfilebuttom" ngf-select ngf-change="form.options.uploadPic($file, form.options, arrayIndex)"
           ngf-fix-orientation="true" ngf-validate="form.options.uploadvalidate?form.options.uploadvalidate:{size: {max: '20MB', min: '10B'}}" ng-class="form.class" tabindex="-1">
     <span ng-if="!$file[form.options.resultKey]">上传文件</span>
     <span class="file-progress" ng-if="!$file[form.options.resultKey]"
@@ -12,7 +12,7 @@
             ng-bind="$file[form.options.progressKey] + '%'"> </span>
     </span>
     <span ng-show="$file[form.options.resultKey]">上传成功</span>
-  </a>
+  </md-button>
   <br ng-if="form.options.suggestBottom" />
   <span class="uploadfilelabel" ng-if="form.options.suggestlabel" ng-style="{'padding-left': (form.options.suggestBottom? '0px' : '10px')}" ng-bind="form.options.suggestlabel"></span></div>
   <span ng-if="$file[form.options.errorMsgKey]" class="sr-only">错误: {{$file[form.options.errorMsgKey]}}</span>
