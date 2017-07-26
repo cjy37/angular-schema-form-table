@@ -5,7 +5,7 @@
   <div class="ng-table-toolbar" ng-if="!form.hideTopToggle">
     <div id="toolbar_btnoption_list" class="pull-left btn-group ng-scope">
 	    <div class="btnlist-inner">
-        <md-button ng-repeat="btn in form.toolbar" class="btn btn-default" 
+        <md-button ng-repeat="btn in form.toolbar"
             ng-class="btn.htmlClass" 
             ng-if="btn.condition ? btn.condition() : true"
 		        ng-click="btn.action();">
@@ -14,12 +14,16 @@
 	    </div>
     </div>
     <div class="columns columns-right btn-group pull-right">
-      <md-button class="btn btn-default" name="refresh" title="刷新" ng-click="form.tableParams.reload()"><i
-        class="refresh icon"></i></md-button>
-      <md-button ng-if="form.showToggle" class="btn btn-default" ng-click="form.toggleView=!form.toggleView" name="toggle" title="切换"><i
-        class="browser icon"></i></md-button>
+      <md-button class="md-icon-button" name="refresh" title="刷新" 
+        ng-click="form.tableParams.reload()"><i
+        class="refresh icon"></i>
+      </md-button>
+      <md-button ng-if="form.showToggle" class="md-icon-button" 
+        ng-click="form.toggleView=!form.toggleView" name="toggle" title="切换"><i
+        class="browser icon"></i>
+      </md-button>
       <div class="keep-open btn-group" title="列">
-        <md-button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
+        <md-button class="md-icon-button dropdown-toggle" data-toggle="dropdown"><i
           class="grid layout icon"></i> <span class="caret"></span></md-button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="col in form.items">
@@ -28,7 +32,7 @@
         </ul>
       </div>
       <div class="export btn-group">
-        <md-button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="cloud download icon"></i> <span class="caret"></span></md-button>
+        <md-button class="md-icon-button dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="cloud download icon"></i> <span class="caret"></span></md-button>
         <ul class="dropdown-menu export-table" role="menu">
           <li><a title="excel" href="javascript:void(0)">MS-Excel</a></li>
           <li><a title="csv" href="javascript:void(0)">CSV</a></li>
