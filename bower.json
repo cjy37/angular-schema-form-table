@@ -1,6 +1,6 @@
 {
   "name": "join-admin",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "join admin project",
   "main": "app.js",
   "keywords": [
