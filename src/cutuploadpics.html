@@ -7,7 +7,7 @@
     </div>
     <div class="uploadimgscontent"><div class="uploadimgsbuttom" ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true"
          class="upload-img-one upload-btn" file-button file-change="$$value$$.push(image)"
-         fl-title="剪裁" fl-image-format="image/jpeg">
+         fl-title="剪裁" fl-image-format="form.options.imageFormat" fl-aspect-ratio="form.options.aspectRatio">
       <span class='btn {{form.btnHtmlClass || "btn-success"}}'>{{form.btn_title || '选择图片'}}</span>
     </div>
     <span class="uploadimgslabel" ng-if="form.options.suggestlabel" ng-bind-html="form.options.suggestlabel"></span></div>
