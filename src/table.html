@@ -53,7 +53,7 @@
           <div ng-switch-when="radioRow" ng-class="col.fieldClass"><input type="radio" ng-model="form['selected']" ng-value="row" /></div>
           <div ng-switch-when="serial" ng-class="col.fieldClass" ng-bind-html="$data.indexOf(row)+1+(params.count()*(params.page()-1))"></div>
           <div ng-switch-when="txt" ng-class="col.fieldClass" ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></div>
-          <div ng-switch-when="actionLink" ng-class="col.fieldClass">
+          <div ng-switch-when="actionLink" ng-class="col.fieldClass" ng-if="col.condition? col.condition : true">
             <a href="javascript:;" ng-click="col.action(this, row)"
                ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></a>
           </div>
