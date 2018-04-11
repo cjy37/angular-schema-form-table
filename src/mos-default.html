@@ -4,7 +4,7 @@
   <div class="joininputcol">
     <input ng-if="!form.fieldAddonLeft && !form.fieldAddonRight"
            ng-show="form.key && form.type!='label'"
-           autocomplete="off"
+           autocomplete="nope"
            type="{{form.input_type || form.type.replace('mos-','')}}"
            step="any"
            sf-changed="form"
@@ -30,7 +30,7 @@
       </span>
 
       <input ng-show="form.key && form.type!='label'"
-             autocomplete="off"
+             autocomplete="nope"
              type="{{form.input_type || form.type.replace('mos-','')}}"
              step="any"
              sf-changed="form"
