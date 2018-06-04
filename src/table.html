@@ -51,8 +51,8 @@
           <!--<div ng-switch-when="checkRow" ng-class="col.fieldClass"><input type="checkbox" ng-model="row['selected']" ng-click="form.selectOne($event)" /></div>-->
           <div ng-switch-when="checkRow" ng-class="col.fieldClass"><label class="col-checkbox-label" ng-class="{'icon icon-home_Screen_hook active': row['selected']}"><input type="checkbox" ng-model="row['selected']" ng-click="form.selectOne($event)" /></label></div>
           <div ng-switch-when="radioRow" ng-class="col.fieldClass"><input type="radio" ng-model="form['selected']" ng-value="row" /></div>
-          <div ng-switch-when="serial" ng-class="col.fieldClass" ng-bind-html="$data.indexOf(row)+1+(params.count()*(params.page()-1))"></div>
-          <div ng-switch-when="txt" ng-class="col.fieldClass" ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></div>
+          <div ng-switch-when="serial" ng-class="col.fieldClass" ng-bind="$data.indexOf(row)+1+(params.count()*(params.page()-1))"></div>
+          <div ng-switch-when="txt" ng-class="col.fieldClass" ng-bind="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></div>
           <div ng-switch-when="actionLink" ng-class="col.fieldClass" ng-if="col.condition? col.condition : true">
             <a href="javascript:;" ng-click="col.action(this, row)"
                ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></a>
@@ -63,17 +63,17 @@
 		  <div ng-switch-when="template" ng-class="col.fieldClass">
 			<div ng-include="col.templateUrl"></div>
           </div>
-          <button ng-switch-when="button" type="button" class="btn" ng-class="col.fieldClass"
+          <a ng-switch-when="button" type="button" class="btn" ng-class="col.fieldClass"
                   ng-click="col.action(this, row)">
             <span ng-if="col.iconClass" class="glyphicon" ng-class="col.iconClass"></span>
-            <span ng-bind-html="col.text"></span>
-          </button>
+            <span ng-bind="col.text"></span>
+          </a>
           <div ng-switch-when="buttons" ng-class="col.fieldClass">
-            <button ng-repeat="colBtn in col.items" type="button" class="btn" ng-class="colBtn.fieldClass"
+            <a ng-repeat="colBtn in col.items" type="button" class="btn" ng-class="colBtn.fieldClass"
                     ng-click="colBtn.action(this, row)">
               <span ng-if="colBtn.iconClass" class="glyphicon" ng-class="colBtn.iconClass"></span>
-              <span ng-bind-html="colBtn.text"></span>
-            </button>
+              <span ng-bind="colBtn.text"></span>
+            </a>
           </div>
           <div ng-switch-default>
             该列类型未开发。。。<!--<sf-decorator ng-model="row" form="col"></sf-decorator>-->
