@@ -3,6 +3,7 @@
  */
 var infoBox, infoBoxTimeoutId, LoadingBox;
 var selected_row_ids = "";
+var mq = {};
 
 var CtrlEnum = {
   ckeditor : {
@@ -2104,7 +2105,7 @@ var mosApp = angular.module('mosApp',
     'ngSanitize', 'angularjs-dropdown-multiselect', 'ui.bootstrap',
     'schemaForm-datepicker', 'schemaForm-datetimepicker', 'schemaForm-timepicker',
     'colorpicker.module', 'ngFileUpload', 'ngJsTree',
-    'dndLists', 'ui.router', 'ngAnimate', 'ngBootstrap', 'treeGrid'])
+    'dndLists', 'ui.router', 'ngAnimate', 'ngBootstrap', 'treeGrid', 'bsTable'])
   .config([
     '$compileProvider',
     function ($compileProvider) {

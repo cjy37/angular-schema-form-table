@@ -23,32 +23,35 @@
     <link href="http://cdn.bootcss.com/angular.js/1.4.9/angular-csp.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://zhangguiplus.oss-cn-shenzhen.aliyuncs.com/assets/lib/Swiper/dist/css/swiper.min.css">
-
+    <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+    
     <link rel="stylesheet" href="http://cdn.bootcss.com/ng-table/1.0.0/ng-table.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/angular-ui-select/0.20.0/select.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css">
 
+    <link rel="stylesheet" href="demo.css">
+    
     <!-- BEGIN CORE PLUGINS -->
 
-    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.js"></script>
     <script src="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://cdn.bootcss.com/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
     <script src="http://cdn.bootcss.com/moment.js/2.10.6/moment.min.js"></script>
     <script src="http://cdn.bootcss.com/moment.js/2.10.6/moment-with-locales.min.js"></script>
     <script src="http://cdn.bootcss.com/moment.js/2.10.6/locale/zh-cn.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap-daterangepicker/2.1.18/daterangepicker.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <!-- END CORE PLUGINS -->
 
     <!-- BEGIN CORE ANGULARJS PLUGINS -->
-    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-sanitize.min.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-touch.min.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-route.min.js"></script>
-    <script src="http://cdn.bootcss.com/angular.js/1.5.0/angular-animate.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.4.9/angular-animate.min.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.4.9/i18n/angular-locale_zh-cn.js"></script>
     <script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
     <script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
@@ -61,9 +64,18 @@
     <!--SCRIPTS-->
     <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/select2/select2_locale_zh-CN.js"></script>
-    <script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
     <script src="bower_components/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
-    <script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="bower_components/bootstrap-table/dist/extensions/treegrid/bootstrap-table-treegrid.js"></script>
+    <script src="bower_components/bootstrap-table/dist/extensions/angular/bootstrap-table-angular.js"></script>
+
+    <!-- 
+        <script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+        <script src="//rawgit.com/wenzhixin/bootstrap-table-fixed-columns/master/bootstrap-table-fixed-columns.js"></script> 
+        <script src="bower_components/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
+    -->
+
+    <script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/ng-bs-daterangepicker/dist/ng-bs-daterangepicker.min.js"></script>
@@ -86,6 +98,10 @@
     <script src="http://cdn.bootcss.com/angular-schema-form/0.8.13/schema-form.min.js"></script>
     <script src="http://cdn.bootcss.com/angular-schema-form/0.8.13/bootstrap-decorator.min.js"></script>
     <script src="http://cdn.bootcss.com/tv4/1.2.7/lang/zh-CN.min.js"></script>
+
+    <!-- 1. https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js -->
+    <script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+
     <script src="bower_components/angular-schema-form-dynamic-select/ui-sortable.js"></script>
     <script src="bower_components/angular-schema-form-dynamic-select/angular-schema-form-dynamic-select.js"></script>
     <script src="bower_components/angular-schema-form-dynamic-select/app.js"></script>
@@ -96,27 +112,16 @@
     <script src="bower_components/jspdf-autotable/dist/jspdf.plugin.autotable.js"></script>
     <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
     <script src="bower_components/fancybox-plus/dist/jquery.fancybox-plus.js"></script>
-    <script src="bower_components/filesaver.js/FileSaver.js"></script>
+    <script src="bower_components/file-saver/FileSaver.js"></script>
     <script src="bower_components/angular-bootstrap-grid-tree/src/tree-grid-directive.js"></script>
     <!--SCRIPTS END-->
 
     <script src="bootstrap-table.js"></script>
     <script src="demo.js"></script>
 
-    <!--
-   includ angular ckeditor
-   https://github.com/lemonde/angular-ckeditor
-   -->
-    <script src="http://cdn.bootcss.com/ckeditor/4.4.5/ckeditor.js"></script>
-    <script src="http://cdn.bootcss.com/ckeditor/4.4.5/lang/zh-cn.js"></script>
-    <script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
-    <script>
-        mosApp.requires.push('ckeditor');
-    </script>
-
 </head>
 
-<body style="padding-top:0;width:100%;height: 100%; background-color: #FFFFFF;" ng-app="mosApp">
+<body style="padding-top:0;width:100%;height: 100%; background-color: #FFFFFF;" ng-app="mosApp" class="version-2017-001">
 
 
 <script>
@@ -132,13 +137,14 @@
         {key: 'rpc',      name: '远程调用'},
         {key: 'sms',      name: '发送短信'},
         {key: 'pay',      name: '在线支付'},
-        {key: 'search',      name: '表单'}
+        {key: 'search',   name: '表单'},
+        {key: 'bsTable',  name: 'Bootstrap表格'}
     ];
 
     var routes = {};
 
     mosApp.config(function ($urlRouterProvider, $stateProvider) {
-        //$urlRouterProvider.otherwise('/404');
+        $urlRouterProvider.otherwise('/');
         //$stateProvider.state('404', {url: '/404', templateUrl: "/page/home/notfound"});
         angular.forEach(menus, function (item, index) {
             var value = {name: item.name, url: '/'+item.key+'/:name', templateUrl: "templates/"+item.key+".html"};
@@ -172,18 +178,18 @@
 
                 $scope.$on('$stateChangeError', function(event) {
                     console.error('state 404...');
-                    $state.go('404');
+                    $state.go('/');
                 });
 
                 $scope.$on('$stateNotFound', function(event){
                     console.error('$stateNotFound...'); // {inherit:false} + default options
-                    $state.go('404');
+                    $state.go('/');
                 });
 
             })
 
-            .controller('pageCtrl', function ($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q) {
-                pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q);
+            .controller('pageCtrl', function ($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q, $compile) {
+                pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q, $compile);
             });
 
 </script>
