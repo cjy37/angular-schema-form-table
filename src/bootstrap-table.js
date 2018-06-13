@@ -572,6 +572,7 @@
       'mos-tree-grid',
       base + 'mos-tree-grid.html'
     );
+
     //mos-radios
     var mosradios = function(name, schema, options) {
         if (schema.format === 'mos-radios') {
@@ -591,6 +592,27 @@
     schemaFormDecoratorsProvider.createDirective(
         'mos-radios',
         base + 'mos-radios.html'
+    );
+
+    //bs-table
+    var bsTable = function (name, schema, options) {
+      if (schema.format === 'bs-table') {
+        var f = schemaFormProvider.stdFormObj(name, schema, options);
+        f.key = options.path;
+        f.type = 'bs-table';
+        options.lookup[sfPathProvider.stringify(options.path)] = f;
+        return f;
+      }
+    };
+    schemaFormProvider.defaults.string.unshift(bsTable);
+    schemaFormDecoratorsProvider.addMapping(
+      'bootstrapDecorator',
+      'bs-table',
+      base + 'bs-table.html'
+    );
+    schemaFormDecoratorsProvider.createDirective(
+      'bs-table',
+      base + 'bs-table.html'
     );
 
     schemaFormDecoratorsProvider.createDirectives({
@@ -626,6 +648,7 @@
       'mos-tree-grid' : base + 'mos-tree-grid.html',
       'popoverUser' : base + 'popover-user.html',//用户选择弹出件
       'mos-radios' : base + 'mos-radios.html',
+      'bs-table' : base + 'bs-table.html',
       'label' : base + 'mos-default.html'//表单标题组件
     });
 

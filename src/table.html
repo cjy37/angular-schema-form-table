@@ -52,7 +52,7 @@
           <div ng-switch-when="checkRow" ng-class="col.fieldClass"><label class="col-checkbox-label" ng-class="{'icon icon-home_Screen_hook active': row['selected']}"><input type="checkbox" ng-model="row['selected']" ng-click="form.selectOne($event)" /></label></div>
           <div ng-switch-when="radioRow" ng-class="col.fieldClass"><input type="radio" ng-model="form['selected']" ng-value="row" /></div>
           <div ng-switch-when="serial" ng-class="col.fieldClass" ng-bind="$data.indexOf(row)+1+(params.count()*(params.page()-1))"></div>
-          <div ng-switch-when="txt" ng-class="col.fieldClass" ng-bind="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></div>
+          <div ng-switch-when="txt" ng-class="col.fieldClass" ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></div>
           <div ng-switch-when="actionLink" ng-class="col.fieldClass" ng-if="col.condition? col.condition : true">
             <a href="javascript:;" ng-click="col.action(this, row)"
                ng-bind-html="col.formatter ? col.formatter(row[col.field], row, $index) : row[col.field]"></a>

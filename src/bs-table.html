@@ -1,0 +1,15 @@
+<div ng-class="form.htmlClass" style="clear: both">
+    <div class="ng-table-toolbar" ng-if="!form.hideTopToggle">
+        <div id="toolbar_btnoption_list" class="pull-left">
+            <div class="btnlist-inner">
+                <button ng-repeat="btn in form.toolbar" class="btn btn-default" ng-class="btn.htmlClass" 
+                    type="button" ng-if="btn.condition ? btn.condition() : true"
+                    ng-click="btn.action()">
+                    <i ng-if="btn.icon" ng-class="btn.icon"></i>
+                    <span>{{btn.name}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <table bs-table-control="form.opt"></table>
+</div>
