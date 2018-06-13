@@ -64,7 +64,6 @@
                     dataField: 'queryData',
                     method: 'post',
                     queryParams: function (params) {
-                        $scope.indexBase = params.offset;
                         if (params.sort)
                             params.sort = params.sort+','+params.order;
                         else
@@ -100,7 +99,8 @@
                         align: 'center',
                         sortable: false,
                         formatter: function (value, row, index) {
-                            return ($scope && $scope.indexBase ? $scope.indexBase : 0) + index + 1;
+                            var opt = $('.table').bootstrapTable('getOptions');
+                            return (opt.pageNumber-1)*opt.pageSize + (index + 1);
                         },
                     }, {
                         field: 'id',
