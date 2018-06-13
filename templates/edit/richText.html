@@ -1,0 +1,12 @@
+<div class="ui form">
+  <div class="fields">
+    <div class="two wide field"><label>边框</label>
+      <input type="checkbox" ng-model="selected.item.option.borderWidth"
+             parse-int ng-true-value="1" ng-false-value="0"/></div>
+    <div class="three wide field"><label>边距</label>
+      <input type="number" ng-model="selected.item.option.padding"/></div>
+  </div>
+  <div class="ui divider"></div>
+  <div ckeditor="richTextOption" ng-model="selected.item.text"></div>
+  <div class="help-block" ng-bind-html="selected.item.description"></div>
+</div>

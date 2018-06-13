@@ -1,0 +1,61 @@
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" style="border:1px solid lightblue;padding-bottom: 10px;padding-left:10px;">
+  <!--style="border: 1px solid #eee"-->
+  <div ng-repeat="item in $$value$$ track by $index" style="margin-top: 1%;"  >
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">第{{item.amiTimes}}轮</div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6" >
+      <label>
+        开始时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.amiStartTime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        结束时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.amiEndTime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6" >
+      <label >
+        签到模式：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn1(item.amiSigninType)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        签退模式：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn1(item.amiSignoutType)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        签到开始时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signinStarttime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        签到结束时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signinEndtime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        签退开始时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signoutStarttime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        签退结束时间：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signoutEndtime)"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label >
+        活动地点：
+      </label>
+      <label class="edit_content_label pre" ng-bind-html="item.amiGpsPlace"></label>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-bottom:1px solid lightblue;" ng-if="!$last" ></div>
+  </div>
+</div>

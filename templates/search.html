@@ -100,63 +100,29 @@
 
 
       {
-        //type : 'mos-array',
-        fieldHtmlClass : 'input-group',
-        //placeholder : '请输入接口地址',
+        key : 'f1',
+        "type" : "text"
+      },
+      {
+        key : 'f2',
+        "type" : "text"
+      },
+      {
+        type : 'actions',
+        fieldHtmlClass : 'btn-success',
         items : [
           {
-            key : 'f1',
-            "type" : "select",
-            htmlClass : 'input-group-btn',
-            fieldHtmlClass : 'fist input-group-btn',
-            "titleMap" : [
-              {name : "a", value : "A"},
-              {name : "b", value : "B"},
-              {name : "c", value : "C"}
-            ]
-          },
-          {
-            "type" : "select",
-            htmlClass : 'input-group-btn',
-            fieldHtmlClass : 'input-group-btn',
-            "titleMap" : [
-              {name : "a", value : "A"},
-              {name : "b", value : "B"},
-              {name : "c", value : "C"}
-            ]
-          },
-          {
-            key : 'f2',
-            placeholder : '....',
-            type : "date-range",
-            htmlClass : 'input-group-btn',
-            fieldHtmlClass : 'input-group-btn',
-            //templateUrl: '/templates/daterange.html',
-            enabletimepicker : MosEnum.momentTimepicker,
-            //singleDatePicker: true,
-            //minDate:moment('1970-1-1','YYYY-MM-DD'),
-            //maxDate:moment(),
-            //limit: "30 days",
-            locale : MosEnum.momentLocales,
-            ranges : MosEnum.momentRanges
-          },
-          {
-            placeholder : '....',
-            type : "date-range",
-            htmlClass : 'input-group-btn',
-            fieldHtmlClass : 'last input-group-btn',
-            //templateUrl: '/templates/daterange.html',
-            enabletimepicker : MosEnum.momentTimepicker,
-            //singleDatePicker: true,
-            //minDate:moment('1970-1-1','YYYY-MM-DD'),
-            //maxDate:moment(),
-            //limit: "30 days",
-            locale : MosEnum.momentLocales,
-            ranges : MosEnum.momentRanges
+            type : 'button',
+            title : '提交',
+            onClick : function () {//清空日志
+              var url = 'http://admin.chinajoinin.com/api/main/loginData';
+              var data = {login_name: $scope.model.f1, password: $scope.model.f2};
+              ajaxPost.call($scope, $http, url, data, '登录', function (ret) {
+                alert(JSON.stringify(ret));
+              });
+            }
           }
-
         ]
-
       },
       {
         key : 'f3',

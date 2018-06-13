@@ -1,0 +1,32 @@
+<div class="news-hot" ng-init="getNewsByNum($$value$$)" ng-style="{'heigth': $$value$$.option.heigth, 'border': ($$value$$.option.borderWidth||0)+'px solid #ddd'}">
+	<div class="news-hot-list">
+		<div class="theme news-hot-bar">
+			<div class="theme-top">
+			<span class="icon-home_hot_club" ng-style="{'color': $$value$$.iconColor}">
+				<span class="path1"></span><span class="path2"></span>
+			</span>
+			<span class="theme-top-title">
+		    	活动新闻
+		  	</span>
+				<div class="theme-angle"></div>
+			</div>
+			<span class="more" ng-click="gotoNewsAll()">
+				更多
+				<span class="icon-common_rightarrow"></span>
+			</span>
+		</div>
+<!--		<div class="" ng-if="$$value$$.nhList.length > 0">
+			<div ng-repeat="item in $$value$$.nhList" class=""
+			     ng-click="gotoNewsDetail(item.id)">
+				<div><img  image-lazy-src="{{item.aniImgUrl | formatDbImgUrl:'w_720'}}"></div>
+				<div>
+					<div ng-bind="item.aniTitle"></div>
+					<div ng-bind="item.createDate | formatDate"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="$$value$$.nhList.length > 0" class="look-more border-top border-bottom" ng-click="">
+		查看更多
+	</div>-->
+</div>

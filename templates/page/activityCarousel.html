@@ -1,0 +1,57 @@
+<style>
+  #myCarousel {
+    height: 50%;
+  }
+  .carousel-image {
+    padding-bottom: 0;
+    background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+    padding-left: 0;
+    padding-right: 0;
+    height: 100%;
+    width: 100vw;
+  }
+  .swiper-container {
+    width: 100%;
+    height: 20vmin;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+</style>
+<div class="activityCarousel" ng-style="{'border': ($$value$$.option.borderWidth||0)+'px solid #ddd'}" ng-init="getActivityByNum($$value$$)">
+  <div id="myCarousel" class="carousel slide"><!--data-ride="carousel"-->
+    <div class="swiper-container"  id="micro-container-{{$$value$$.ids}}">
+      <div class="swiper-wrapper"  id="micro-wrapper-{{$$value$$.ids}}">
+        <div ng-repeat="item in $$value$$.aList" class="swiper-slide" ng-if="item.imgUrl">
+          <div class="carousel-image" style="background-image: url('{{item.imgUrl}}'); background-repeat: no-repeat;"  ng-init="$last && swiper_init($$value$$.ids)">
+          </div>
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination" id="micro-pagination-{{$$value$$.ids}}"></div>
+      <!-- Add Arrows -->
+      <!--<div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>-->
+    </div>
+  </div>
+</div>

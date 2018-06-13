@@ -1,0 +1,211 @@
+<div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" style="border:1px solid lightblue;padding-bottom: 10px;padding-left:10px;">
+  <!--style="border: 1px solid #eee"-->
+  <div ng-repeat="item in $$value$$ track by $index" style="margin-top: 1%;"  >
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">第{{item.amiTimes}}轮</div>
+    <div ng-if="(form.isShowEdit(item.amiStartTime) && !form.showflag)||form.dataType==2||form.dataType==3">
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        开始时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  请输入开始时间"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.amiStartTime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        结束时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  请输入结束时间"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.amiEndTime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+  <!--    <div ng-if="item.signinStarttime!=''">
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        签到开始时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  默认为本轮活动开始前半小时"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.signinStarttime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        签到结束时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  默认为本轮活动开始后半小时"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.signinEndtime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        签退开始时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  默认为本轮活动结束前半小时"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.signoutStarttime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        签退结束时间：
+      </label>
+      <input
+        type="daterange"
+        placeholder="  默认为本轮活动结束后半小时"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.signoutEndtime"
+        enabletimepicker="form.enabletimepicker"
+        min-date="form.minDate"
+        max-date="form.maxDate"
+        limit="form.limit"
+        locale="form.locale"
+        ranges="form.ranges"
+        single-date-picker="true"
+        ranges="form.ranges||MosEnum.momentRanges"
+        format="form.locale.format"
+        separator="form.locale.separator"
+        ng-disabled="{{form.readonly}}"
+      />
+    </div>
+      </div>-->
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        活动地点：
+      </label>
+      <input
+        type="text"
+        placeholder="  请输入活动地点"
+        class="form-control {{form.labelHtmlClass}}"
+        ng-model="item.amiGpsPlace"
+      />
+    </div>
+
+    </div>
+    <div ng-if="(!(form.isShowEdit(item.amiStartTime))|| form.showflag)&&form.dataType!=2&&form.dataType!=3">
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6" >
+        <label>
+          开始时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.amiStartTime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          结束时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.amiEndTime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6" >
+        <label >
+          签到模式：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn1(item.amiSigninType)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          签退模式：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn2(item.amiSignoutType)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          签到开始时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signinStarttime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          签到结束时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signinEndtime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          签退开始时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signoutStarttime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          签退结束时间：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="form.formatterFn(item.signoutEndtime)"></label>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label >
+          活动地点：
+        </label>
+        <label class="edit_content_label pre" ng-bind-html="item.amiGpsPlace"></label>
+      </div>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-bottom:1px solid lightblue;" ng-if="!$last"></div>
+  </div>
+</div>

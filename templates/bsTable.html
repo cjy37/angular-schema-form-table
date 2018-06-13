@@ -1,0 +1,159 @@
+<script>
+ 
+    function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q, $compile) {
+  
+      $scope.param = $stateParams;
+  
+      $scope.schema = {
+        type : 'object',
+        title : 'Upload',
+        properties : {
+          tb : {
+            title : '表格',
+            type : 'object'
+          }
+        }
+      };
+  
+      var ajaxRequest = function (params) {
+        // data you need
+        // just use setTimeout
+        // $timeout(function () {
+        //     var rows = makeRandomRows(params);
+        //     console.log("params:", rows);
+        //     //$scope.form[0].opt.options.data = rows
+        //     params.success({code:0, data: {
+        //             totalCnt: rows.length*10,
+        //             queryData: rows
+        //         }});
+        // }, 400);
+        // return true;
+        var url = 'http://admin.chinajoinin.com/api/activityadvisoryinfo/getData';
+        ajaxPost.call($scope, $http, url, JSON.parse(params.data), '查找', function (ret) {
+            params.success(ret);
+        });
+        return false;
+    };
+  
+    var flagFormatter = function (value, row, index) {
+        return '<img src="' + value + '"/>'
+    };
+    
+
+      $scope.form = [
+
+        // ================== 表格对象 =======================
+        {
+            myclick: function (v) {
+                alert(v);
+            },
+
+          key : 'tb',
+          startEmpty : true,
+          type : "bs-table",
+          //工具条
+          toolbar: [{name: "编辑", action: function () { return $scope.DataOptionEvent({url:"/page/activityadvisoryinfo/edit/edit", type: 3 , title:"编辑"});}, icon: "icon icon-activities_icon_edit",condition:function () { return !$scope.model.delFlag;}},{name: "删除", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/hideData", type: 15 , title:"删除"});}, icon: "icon icon-activities_icon_delete",condition:function () { return !$scope.model.delFlag;}},{name: "彻底删除", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/deleteData", type: 15 , title:"彻底删除"});}, icon: "fa fa-remove",condition:function () { return $scope.model.delFlag==1;}},{name: "删除恢复", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/recoveryData", type: 15 , title:"删除恢复"});}, icon: "fa fa-reply",condition:function () { return $scope.model.delFlag==1;}},{ name: "回收站", icon: "fa fa-recycle", condition: function () { return !$scope.model.delFlag;}, action: function () { return $scope.DataOptionEvent({type:64});}},{ name: "返回", icon: "fa fa-share-square-o", condition: function () { return $scope.model.delFlag==1;}, action: function () { return $scope.DataOptionEvent({type:128});}}],
+          opt: {
+                    ajax: ajaxRequest,
+                    cache: false,
+                    sidePagination: "server",
+                    classes: 'table table-hover table-condensed table-bordered',
+                    buttonsToolbar: ".ng-table-toolbar",
+                    totalField: 'totalCnt',
+                    dataField: 'queryData',
+                    method: 'post',
+                    queryParams: function (params) {
+                        $scope.indexBase = params.offset;
+                        if (params.sort)
+                            params.sort = params.sort+','+params.order;
+                        else
+                            delete params.sort;
+                        
+                        delete params.search;
+                        delete params.order;
+                        return params;
+                    },
+                    responseHandler: function (res) {
+                        return res;
+                    },
+                    pagination: true,
+                    pageSize: 18,
+                    pageList: [18, 25, 50, 100, 200, 500, 1000],
+                    paginationPreText: '上一页',
+                    paginationNextText: '下一页',
+                    showColumns: true,
+                    showRefresh: true,
+                    showToggle: true,
+                    showExport: true,
+                    minimumCountColumns: 5,
+                    clickToSelect: true,
+                    maintainSelected: true,
+                    columns: [{
+                        field: 'state',
+                        checkbox: true
+                    }, {
+                        field: 'id',
+                        title: '序号',
+                        align: 'center',
+                        valign: 'middle',
+                        width: 40,
+                        align: 'center',
+                        sortable: false,
+                        formatter: function (value, row, index) {
+                            return ($scope && $scope.indexBase ? $scope.indexBase : 0) + index + 1;
+                        },
+                    }, {
+                        field: 'id',
+                        title: 'ID',
+                        align: 'center',
+                        valign: 'middle',
+                        sortable: true
+                    }, {
+                        field: 'aaiContent',
+                        title: '主题',
+                        //align: 'center',
+                        valign: 'middle',
+                        sortable: true
+                    }, {
+                        field: 'abiId',
+                        title: '活动',
+                        //align: 'center',
+                        valign: 'middle',
+                        clickToSelect: false,
+                        formatter: function (value, row, index) {
+                            return value ? value.abiName : '';
+                        }
+                    }, {
+                        field: 'createName',
+                        title: '创建人',
+                        align: 'center',
+                        valign: 'middle',
+                        // clickToSelect: false,
+                        formatter: function (value, row, index) {
+                            return '<a ng-click="form.myclick(\''+value+'\')">'+value+'</a>';
+                        }
+                    }]
+                
+            }
+
+        }
+      ];
+  
+      $scope.model = {
+        tb : []
+      };
+      
+    }
+
+    function myclick(v) {
+          alert(v);
+      }
+  </script>
+  <div ng-controller="pageCtrl">
+    <h3>{{param.name}}</h3>
+  
+    <div sf-schema="schema" sf-form="form" sf-model="model"
+         sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}"></div>
+  
+  </div>
+  

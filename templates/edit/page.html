@@ -1,0 +1,29 @@
+<div class="ui form">
+  <div class="inline">
+
+    <div class="sixteen wide field"><label>页面标题</label>
+      <input type="text" ng-model="selected.item.title"
+             parse-int ng-true-value="1" ng-false-value="0"/></div>
+    <div class="sixteen wide field"><label>分享描述</label>
+      <input type="text" ng-model="selected.item.shareDesc"
+             parse-int ng-true-value="1" ng-false-value="0"/></div>
+    <div class="inline">
+      <div class="two wide field"><label>边距</label>
+          <input type="checkbox" ng-model="selected.item.option.hasPadding"
+                 parse-int ng-true-value="1" ng-false-value="0" />
+      </div>
+      <div class="three wide field"><label>页面背景色</label>
+        <input colorpicker class="colorpkr" colorpicker-parent="true"
+             ng-style="{color:selected.item.option.backColor, 'background-color': selected.item.option.backColor}"
+             ng-model="selected.item.option.backColor" />
+	      <input ng-model="selected.item.option.backColor"/>
+      </div>
+	    <div class="three wide field"><label>app主题色</label>
+		    <input colorpicker class="colorpkr" colorpicker-parent="true"
+		           ng-style="{color:selected.item.option.appThemeColor, 'background-color': selected.item.option.appThemeColor}"
+		           ng-model="selected.item.option.appThemeColor" />
+		    <input ng-model="selected.item.option.appThemeColor" />
+	    </div>
+    </div>
+  </div>
+</div>

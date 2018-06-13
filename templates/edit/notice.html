@@ -1,0 +1,21 @@
+<div class="ui form">
+  <div class="fields">
+    <div class="two wide field"><label>边框</label>
+      <input type="checkbox" ng-model="selected.item.option.borderWidth"
+             parse-int ng-true-value="1" ng-false-value="0"/>
+    </div>
+    <div class="four wide field"><label>边距</label>
+      <input type="number" ng-model="selected.item.option.padding"/>
+    </div>
+    <div class="three wide field" style="position: relative"><label>图标颜色</label>
+      <input colorpicker class="colorpkr" colorpicker-parent="true"
+             ng-style="{'color':selected.item.iconColor, 'background-color': selected.item.iconColor}"
+             ng-model="selected.item.iconColor" />
+    </div>
+
+  </div>
+</div>
+<br/>
+<div id="neditformDiv" sf-schema="neditschema" sf-form="neditform" sf-model="selected.item" onKeyDown="stopEnterEvent(event)"
+     sf-options="{ formDefaults: { disableSuccessState: true, feedback: false }}">
+</div>

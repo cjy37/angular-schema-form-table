@@ -1,0 +1,11 @@
+<ul dnd-list="list">
+  <li ng-repeat="$$value$$ in list"
+      dnd-draggable="$$value$$"
+      dnd-effect-allowed="move"
+      dnd-moved="list.splice($index, 1)"
+      dnd-selected="selected = $$value$$"
+      ng-class="{selected: selected === $$value$$}"
+      style="border-width: {{(item.noborder ? 0 : 1)+'px'}}"
+      ng-include="'/templates/page/'+$$value$$.type + '.html'">
+  </li>
+</ul>

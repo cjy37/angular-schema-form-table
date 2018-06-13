@@ -1,0 +1,67 @@
+<style>
+  .activityHot .icon-home_hot {
+    top: 0.5rem;
+    position: relative;
+    font-size: 2.5rem;
+  }
+  .activityHot .padding-theme {
+    padding: 0 0.5rem;
+  }
+  .activityHot .theme {
+    display: inline-block;
+    width: 100%;
+    line-height: 2.5rem;
+    background-color: white;
+    padding-bottom: 0.5rem;
+  }
+  .activityHot .signup {
+    position: absolute;
+    bottom: 0;
+    right: -0.6rem;
+    color: white;
+    background-color: #FF6367;
+    padding: 5px;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+    -webkit-border-bottom-left-radius: 100px;
+    -webkit-border-top-left-radius: 100px;
+  }
+  .activityHot .signup .abiEnrollmentNum {
+    font-size: 2rem;
+  }
+</style>
+<div class="activityHot"  ng-style="{'heigth': $$value$$.option.heigth, 'border': ($$value$$.option.borderWidth||0)+'px solid #ddd'}" ng-init="getSocietyByNum($$value$$)">
+  <span style="display: block" ng-if="$$value$$.sList.length == 0" >
+    热门社团 点击编辑
+  </span>
+  <div ng-if="$$value$$.sList.length > 0" ng-class="item" style="width:100%; padding: 0 0 !important;background-color: white;" >
+    <div class="padding-theme">
+      <div class="theme">
+        <span class="icon-home_hot" ng-style="{'color': $$value$$.iconColor}">
+          <span class="path1"></span><span class="path2"></span>
+        </span>
+      <span style="height: 2.5rem">
+        热门社团
+      </span>
+        <span style="float: right;">更多</span>
+      </div>
+    </div>
+    <div class="ui one column grid container" style="display: inline-block;padding: 0 0 !important;padding-bottom: 0.5rem !important;">
+      <div class="column" ng-repeat="item in $$value$$.sList">
+        <div class="column"  style="background-color: white;">
+          <div class="micropage-product-image" style="background-image: url('{{formatActivityImgUrl(item.imgUrl)}}'); background-repeat: no-repeat;"></div>
+          <div class="ui one column grid container" style="padding-bottom: 0.3rem;">
+            <h2 style="padding: 0.5rem 0 0 0">{{item.fullName}}</h2>
+            <div class="column">
+              <span>
+                <span class="icon-home_add" style="color: #22B5FF;">
+                </span>
+                联系地址：{{item.linkAddress}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

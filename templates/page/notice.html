@@ -1,0 +1,53 @@
+<style>
+  .notice {
+    position: relative;
+  }
+  .scroll-txt {
+    position: relative;
+    overflow: hidden;
+    line-height: 2.5rem;
+    height: 2.5rem;
+    background-color: white;
+  }
+  .notice ul {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .scroll-txt .font-inner {
+    position: absolute;
+    margin-left: 0.5rem;
+  }
+  .notice ul li {
+    background-color: transparent;
+    border: 0;
+    height:2.5rem;
+    line-height: 2.5rem;
+  }
+  .notice .icon-home_notice {
+    top: 0.5rem;
+    position: relative;
+    font-size: 2.5rem;
+    margin-left: 0.6rem;
+  }
+  .notice ul li a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+<div class="notice" ng-style="{'border': ($$value$$.option.borderWidth||0)+'px solid #ddd'}" id="notice-{{$$value$$.ids}}" ng-init="getNoticeByIds($$value$$)">
+  <div class="scroll-txt">
+    <span class="icon-home_notice" ng-style="{'color': $$value$$.iconColor}"></span>
+    <span ng-if="$$value$$.nList.length == 0" style="height: 2.5rem">
+      公告组件 点击编辑
+    </span>
+    <ul class="font-inner" ng-if="$$value$$.nList.length > 0" ng-init="reloadNotice($$value$$.ids)">
+      <li ng-repeat="item in $$value$$.nList">
+        <a>官方通知：{{item.nniTitle}}</a>
+      </li>
+    </ul>
+    <!--ng-if="$$value$$.more == 0"-->
+    <span style="float: right;margin-right: 0.5rem">更多</span>
+  </div>
+</div>

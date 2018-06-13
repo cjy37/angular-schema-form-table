@@ -1,0 +1,55 @@
+<style>
+  .col-md-6 {
+    padding-right: 0px !important;
+  }
+  .navigation-image {
+    padding-bottom: 50%;
+    background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+  }
+  .imageNavigation .row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 5px;
+    width: 100%;
+    background-color: white;
+  }
+  .imageNavigation .row .col {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: block;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+  }
+  .imageNavigation .row .col img {
+    width: 3rem;
+    height: 3rem;
+  }
+</style>
+<div class="imageNavigation"
+     ng-style="{'heigth': $$value$$.option.heigth, 'border': ($$value$$.option.borderWidth||0)+'px solid #ddd'}">
+  <span ng-if="!$$value$$ || !$$value$$.imageNavigation.imgs || $$value$$.imageNavigation.imgs.length == 0 || !$$value$$.imageNavigation.imgs[0].fileImgUrl" style="display: block">
+    图片导航 点击请添加
+  </span>
+  <div ng-if="$$value$$.imageNavigation.imgs.length > 0" class="ui two column grid container" style="width:100% !important;display: inline-block; ">
+    <div class="row">
+      <div class="col" ng-repeat="item in $$value$$.imageNavigation.imgs">
+        <img ng-src="{{item.fileImgUrl}}" />
+        <!--<div class="navigation-image" style="background-image: url('{{item.fileImgUrl}}'); background-repeat: no-repeat;">-->
+        <!--</div>-->
+        <div style="text-align: center;padding: 0.3rem 0 0 0;font-size: 1rem;color: #666666;">{{item.description}}</div>
+      </div>
+    </div>
+  </div>
+</div>
