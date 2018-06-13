@@ -39,10 +39,9 @@
         return '<img src="' + value + '"/>'
     };
     
-
+    // ================== 表格对象 =======================
       $scope.form = [
 
-        // ================== 表格对象 =======================
         {
             myclick: function (v) {
                 alert(v);
@@ -54,11 +53,13 @@
           //工具条
           toolbar: [{name: "编辑", action: function () { return $scope.DataOptionEvent({url:"/page/activityadvisoryinfo/edit/edit", type: 3 , title:"编辑"});}, icon: "icon icon-activities_icon_edit",condition:function () { return !$scope.model.delFlag;}},{name: "删除", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/hideData", type: 15 , title:"删除"});}, icon: "icon icon-activities_icon_delete",condition:function () { return !$scope.model.delFlag;}},{name: "彻底删除", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/deleteData", type: 15 , title:"彻底删除"});}, icon: "fa fa-remove",condition:function () { return $scope.model.delFlag==1;}},{name: "删除恢复", action: function () { return $scope.DataOptionEvent({url:"/api/activityadvisoryinfo/recoveryData", type: 15 , title:"删除恢复"});}, icon: "fa fa-reply",condition:function () { return $scope.model.delFlag==1;}},{ name: "回收站", icon: "fa fa-recycle", condition: function () { return !$scope.model.delFlag;}, action: function () { return $scope.DataOptionEvent({type:64});}},{ name: "返回", icon: "fa fa-share-square-o", condition: function () { return $scope.model.delFlag==1;}, action: function () { return $scope.DataOptionEvent({type:128});}}],
           options: {
-                    ajax: ajaxRequest,
                     cache: false,
+                    minimumCountColumns: 2,
                     sidePagination: "server",
                     classes: 'table table-hover table-condensed table-bordered',
                     buttonsToolbar: ".ng-table-toolbar",
+
+                    ajax: ajaxRequest,
                     totalField: 'totalCnt',
                     dataField: 'queryData',
                     method: 'post',
@@ -73,21 +74,20 @@
                         delete params.order;
                         return params;
                     },
-                    responseHandler: function (res) {
-                        return res;
-                    },
+
                     pagination: true,
                     pageSize: 18,
                     pageList: [18, 25, 50, 100, 200, 500, 1000],
                     paginationPreText: '上一页',
                     paginationNextText: '下一页',
+
                     showColumns: true,
                     showRefresh: true,
                     showToggle: true,
                     showExport: true,
-                    minimumCountColumns: 5,
                     clickToSelect: true,
                     maintainSelected: true,
+
                     columns: [{
                         field: 'state',
                         checkbox: true
@@ -104,20 +104,25 @@
                         },
                     }, {
                         field: 'id',
-                        title: 'ID',
+                        title: 'id编号',
                         align: 'center',
                         valign: 'middle',
-                        sortable: true
+                        sortable: true,
+                        switchable: true,
+                        visible: false,
                     }, {
                         field: 'aaiContent',
                         title: '主题',
                         //align: 'center',
                         valign: 'middle',
-                        sortable: true
+                        sortable: true,
+                        switchable: false,
+                        visible: true
                     }, {
                         field: 'abiId',
                         title: '活动',
-                        //align: 'center',
+                        switchable: true,
+                        visible: false,
                         valign: 'middle',
                         clickToSelect: false,
                         formatter: function (value, row, index) {
