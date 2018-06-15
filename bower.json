@@ -18,6 +18,9 @@
     "tests"
   ],
   "dependencies": {
+    "angular-schema-form": "~0.8.2"
+  },
+  "devDependencies": {
     "angular-schema-form": "~0.8.2",
     "angular-schema-form-dynamic-select": "~0.12.4",
     "angular-strap": ">= 2.2.2",
