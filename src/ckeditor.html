@@ -1,5 +1,5 @@
 <div class="form-group schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess()}">
-  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}" ng-bind-html="form.title"></label>
+  <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle(), 'schema-form-required': form.inputrequired === true}" for="{{form.key.slice(-1)[0]}}">{{form.title}}<span ng-if="form.inputrequired === true" class="join-required"></span></label>
   <div class="joininputcol">
     <!--<div ng-class="form.fieldHtmlClass" ckeditor="form.options" ng-model="$$value$$" ready="form.onReady()" schema-validate="form"></div>-->
     <textarea froala="form.options" ng-model="$$value$$" schema-validate="form"></textarea>
