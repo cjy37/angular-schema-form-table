@@ -1,6 +1,6 @@
 {
   "name": "angular-schema-form-table",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "table add-on for schema form",
   "scripts": {
     "test": "rm -fr coverage && ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS karma.conf.js"

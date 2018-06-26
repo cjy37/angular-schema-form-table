@@ -1550,7 +1550,7 @@ body.version-2017-001 {
   height: 38px;
 }
 .version-2017-001 .table-hover > tbody > tr:hover {
-  background-color: #dde5ea;
+  background-color: #edf1f3;
 }
 .version-2017-001 .col-checkbox-label {
   display: inline-block;
@@ -1587,11 +1587,23 @@ body.version-2017-001 {
 .version-2017-001 .table > tfoot > tr > th,
 .version-2017-001 .table > thead > tr > td,
 .version-2017-001 .table > thead > tr > th {
-  /*line-height: 20px;*/
+  /* line-height: 20px; */
   padding: 0 10px;
   vertical-align: middle;
   height: 35px;
-  /* border: 1px solid #DCE3EA;*/
+  white-space: nowrap;
+  /* min-height: 35px; */
+  /* border: 1px solid #DCE3EA; */
+}
+.version-2017-001 .table.tree-grid > tbody > tr > td,
+.version-2017-001 .table.tree-grid > tbody > tr > th,
+.version-2017-001 .table.tree-grid > tfoot > tr > td,
+.version-2017-001 .table.tree-grid > tfoot > tr > th,
+.version-2017-001 .table.tree-grid > thead > tr > td,
+.version-2017-001 .table.tree-grid > thead > tr > th {
+  line-height: 20px;
+  min-height: 35px;
+  border: 1px solid #DCE3EA;
 }
 .version-2017-001 .custom-infos .form-group,
 .version-2017-001 .custom-infos .schema-form-array,

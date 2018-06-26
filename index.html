@@ -22,14 +22,20 @@
     <link href="http://cdn.bootcss.com/bootstrap-daterangepicker/2.1.18/daterangepicker.min.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/angular.js/1.4.9/angular-csp.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://zhangguiplus.oss-cn-shenzhen.aliyuncs.com/assets/lib/Swiper/dist/css/swiper.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+    <link href="http://zhangguiplus.oss-cn-shenzhen.aliyuncs.com/assets/lib/Swiper/dist/css/swiper.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="http://cdn.bootcss.com/ng-table/1.0.0/ng-table.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/angular-ui-select/0.20.0/select.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css">
+    <link href="bower_components/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-table-fixed-columns/bootstrap-table-fixed-columns.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="demo.css">
+    <link href="http://cdn.bootcss.com/ng-table/1.0.0/ng-table.min.css" rel="stylesheet" >
+    <link href="https://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" rel="stylesheet">
+
+    <link href="http://cdn.bootcss.com/angular-ui-select/0.20.0/select.min.css" rel="stylesheet" >
+    <link href="http://cdn.bootcss.com/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css" rel="stylesheet" >
+    <link href="bower_components/angular-bootstrap-grid-tree/src/treeGrid.css" rel="stylesheet" >
+    
+    <link href="demo.css" rel="stylesheet">
     
     <!-- BEGIN CORE PLUGINS -->
 
@@ -67,15 +73,18 @@
     <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
     <script src="bower_components/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
     <script src="bower_components/bootstrap-table/dist/extensions/treegrid/bootstrap-table-treegrid.js"></script>
+    <script src="bower_components/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
     <script src="bower_components/bootstrap-table/dist/extensions/angular/bootstrap-table-angular.js"></script>
 
+    <script src="bower_components/jquery-treegrid/jquery.treegrid.js"></script>
+    <script src="bower_components/bootstrap-table-fixed-columns/bootstrap-table-fixed-columns.js"></script> 
     <!-- 
         <script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
-        <script src="//rawgit.com/wenzhixin/bootstrap-table-fixed-columns/master/bootstrap-table-fixed-columns.js"></script> 
-        <script src="bower_components/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
+        
+        
     -->
-
     <script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+    
     <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/ng-bs-daterangepicker/dist/ng-bs-daterangepicker.min.js"></script>
@@ -99,8 +108,6 @@
     <script src="http://cdn.bootcss.com/angular-schema-form/0.8.13/bootstrap-decorator.min.js"></script>
     <script src="http://cdn.bootcss.com/tv4/1.2.7/lang/zh-CN.min.js"></script>
 
-    <!-- 1. https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js -->
-    <script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
 
     <script src="bower_components/angular-schema-form-dynamic-select/ui-sortable.js"></script>
     <script src="bower_components/angular-schema-form-dynamic-select/angular-schema-form-dynamic-select.js"></script>
@@ -138,7 +145,9 @@
         {key: 'sms',      name: '发送短信'},
         {key: 'pay',      name: '在线支付'},
         {key: 'search',   name: '表单'},
-        {key: 'bsTable',  name: 'Bootstrap表格'}
+        {key: 'bsTable',  name: 'Bs表格'},
+        //bsTreeTable
+        {key: 'bsTreeTable',  name: 'BsTree表格'},
     ];
 
     var routes = {};

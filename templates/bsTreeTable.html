@@ -1,0 +1,175 @@
+<script>
+ 
+    function pageCtrl($scope, $http, Upload, $timeout, $uibModal, $stateParams, $sce, $parse, $interpolate, NgTableParams, $q, $compile) {
+  
+      $scope.param = $stateParams;
+  
+      $scope.schema = {
+        type : 'object',
+        title : 'Upload',
+        properties : {
+          tb : {
+            title : '表格',
+            type : 'object'
+          }
+        }
+      };
+  
+      var ajaxRequest = function (params) {
+        // data you need
+        // just use setTimeout
+        // $timeout(function () {
+        //     var rows = makeRandomRows(params);
+        //     console.log("params:", rows);
+        //     //$scope.form[0].opt.options.data = rows
+        //     params.success({code:0, data: {
+        //             totalCnt: rows.length*10,
+        //             queryData: rows
+        //         }});
+        // }, 400);
+        // return true;
+        var url = 'http://localhost:1557/api/sysofficeinfo/getData';
+        ajaxPost.call($scope, $http, url, JSON.parse(params.data), '查找', function (ret) {
+            params.success(ret);
+        });
+        return false;
+    };
+  
+    var flagFormatter = function (value, row, index) {
+        return '<img src="' + value + '"/>'
+    };
+    $scope.control_tree1 = {};
+    // ================== 表格对象 =======================
+      $scope.form = {
+                type: "mos-tree-grid",
+                key: "tree_data",
+                expanding_property: {
+                    field: "fullName",
+                    displayName: "全称"
+                },
+                col_defs: [
+                    {
+                        field: "ubiTypeName",
+                        displayName: "机构类型"
+                    },
+                    {
+                        field: "pid",
+                        displayName: "上级机构",
+                        cellTemplate: '<span ng-bind="row.branch[col.field].fullName"></span>'
+                    },
+                    {
+                        field: "isShow",
+                        displayName: "是否显示",
+                        sortable: true,
+                        sortingType: "number",
+                        cellTemplate: '<span ng-bind="row.branch[\'isShowName\']"></span>'
+                    },
+                    {
+                        field: "sortno",
+                        displayName: "排序",
+                        sortable: true,
+                        sortingType: "string",
+                        filterable: true,
+                        cellTemplate: '<a ng-if="row.branch[\'ubiType\']>1" class="join-move-btn btn ng-scope margin-r-10" ng-click="col.action(row.branch, 1)">上移</a><a ng-if="row.branch[\'ubiType\']>1" class="join-move-btn btn ng-scope" ng-click="col.action(row.branch, 0)">下移</a>',
+                        action: function (row, type) {         // this works too: $scope.someMethod;
+                            if ($('i.fa.fa-edit:visible', $('#toolbar_btnoption_list')).length > 0) {
+                                DataOptionEvent({
+                                    $scope: $scope,
+                                    $http: $http,
+                                    url: '/api/sysofficeinfo/sortMoveData/2',
+                                    id: row.id,
+                                    data: {isup: '1' + type},
+                                    type: 10,
+                                    title: type == 1 ? '上移' : '下移',
+                                    cb: function (optcall, data) {
+                                        optcall.$scope.LoadTreeGridData();
+                                    }
+                                });
+                            }
+                        }
+                    },
+                    {
+                        field: "isState",
+                        displayName: "数据状态",
+                        sortable: true,
+                        sortingType: "number",
+                        cellTemplate: '<span ng-bind="row.branch[\'isStateName\']"></span>'
+                    }
+                ],
+                gridtree_selecthandler: function (row) {
+                    if (row && row.id)
+                        selected_row_ids = row.id.toString();
+                },
+                gridtree_clickhandler: function (row) {
+                    DataOptionEvent({
+                        $scope: $scope,
+                        $http: $http,
+                        url: '/page/sysofficeinfo/edit/show/2',
+                        id: row.id,
+                        type: 2,
+                        title: row.fullName
+                    });
+                },
+                //control_tree: $scope.control_tree1
+            };
+  
+      $scope.model = [];
+      $scope.ObjectData = {};
+
+        $scope.init = function () {
+
+            function formatData(data) {
+                // data.sort(function(a,b) {
+                //     if ( a.pid < b.pid )
+                //         return -1;
+                //     if ( a.pid > b.pid )
+                //         return 1;
+                //     if ( a.sortno < b.sortno )
+                //         return -1;
+                //     if ( a.sortno > b.sortno )
+                //         return 1;
+                //     return 0;
+                // });
+                data.forEach(function (item) {
+                    if (_.isObject(item.pid))
+                        item.pid = item.pid.id;
+                    $scope.ObjectData[item.id+''] = item;
+                });
+                var tree = [];
+                data.forEach(function (item) {
+                    // root
+                    if (item.pid=='0'){
+                        tree.push(item);
+                    } else {
+                        var p = $scope.ObjectData[item.pid+''];
+
+                        if (!p){
+                            console.log('找不到父对象',item);
+                            tree.push(item);
+                            return;
+                        }
+                        
+                        if (!p.hasOwnProperty('children') || !_.isArray(p.children)){
+                            p.children = [];
+                        }
+                        p.children.push(item);
+                    }
+                });
+                return tree;
+            }
+
+            $http.get('demo_data.json').success(function (data) {
+                $scope.model = formatData(data);
+            });
+        }
+        $scope.init();
+    }
+
+  </script>
+  <div ng-controller="pageCtrl">
+    <h3>{{param.name}}</h3>
+
+    <tree-grid class="table tree-grid" tree-data="model" col-defs="form.col_defs" on-click="gridtree_selecthandler(branch)" on-select="gridtree_selecthandler(branch)" expand-on="form.expanding_property"></tree-grid>
+
+  </div>
+  
