@@ -13,7 +13,7 @@
              schema-validate="form"
              ng-value="item.value"
              name="{{form.key.join('.')}}">
-      <span ng-class="{'icon-activities_icon_Radio': item.value === $$value$$, 'icon-activities_icon_Radio_nor': item.value !== $$value$$}"></span>
+      <span ng-class="{'icon icon-activities_icon_Radio': item.value === $$value$$, 'icon icon-activities_icon_Radio_nor': item.value !== $$value$$}"></span>
       <span ng-bind-html="item.name"></span>
       <span ng-if="item.label" class="join-radio-label" ng-bind-html="item.label"></span>
     </label>

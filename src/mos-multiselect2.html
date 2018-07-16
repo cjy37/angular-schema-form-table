@@ -13,7 +13,7 @@
       <small ng-if="form.map.moreitemname1"><span ng-bind-html="tmpitem[form.map.moreitemname1]" style="padding-right: 10px;"></span><span ng-if="form.map.moreitemname2" ng-bind-html="tmpitem[form.map.moreitemname2]"></span></small>
     </ui-select-choices>
   </ui-select>
-  <span class="input-group-btn"><button class="btn" ng-class="form.addDataOption.class" type="button" ng-click="form.addDataOption.cb($event,form)"><span class="icon-activities_icon_add" style="padding-right:5px;" ng-if="!form.addDataOption.title"></span>{{form.addDataOption.title||'新增'}}</button>
+  <span class="input-group-btn"><button class="btn" ng-class="form.addDataOption.class" type="button" ng-click="form.addDataOption.cb($event,form)"><span class="icon icon-activities_icon_add" style="padding-right:5px;" ng-if="!form.addDataOption.title"></span>{{form.addDataOption.title||'新增'}}</button>
   </span></div>
   <ui-select ng-if="!form.addDataOption" multiple ng-model="$$value$$" theme="select2" ng-disabled="{{form.readonly}}"
                class="joininputcol {{form.fieldHtmlClass}}" schema-validate="form" sf-changed="form">

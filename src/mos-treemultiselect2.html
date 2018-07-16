@@ -9,7 +9,7 @@
       <small ng-if="form.map.moreitemname1" ng-bind="item[form.map.moreitemname1]" style="padding-right: 10px;"></small>
       <small ng-if="form.map.moreitemname2" ng-bind="item[form.map.moreitemname2]"></small></li>
 		</ul>
-    <span class="input-group-btn"><button class="btn" ng-class="form.addDataOption.class" type="button" ng-click="form.addDataOption.cb($event,form)"><span class="icon-activities_icon_add" style="padding-right:5px;" ng-if="!form.addDataOption.title"></span>{{form.addDataOption.title||'新增'}}</button></span>
+    <span class="input-group-btn"><button class="btn" ng-class="form.addDataOption.class" type="button" ng-click="form.addDataOption.cb($event,form)"><span class="icon icon-activities_icon_add" style="padding-right:5px;" ng-if="!form.addDataOption.title"></span>{{form.addDataOption.title||'新增'}}</button></span>
   </div>
   <ul ng-if="!form.addDataOption" class="select2-choices">
     <li class="select2-search-field" ng-if="!$$value$$ || $$value$$.length == 0"><input type="text"  class="select2-input ui-select-search ng-pristine" readonly="readonly" placeholder="{{form.placeholder}}"></li>

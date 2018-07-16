@@ -8,7 +8,7 @@
     <span class="file-progress" ng-show="$files[$index][form.options.progressKey] >= 0">
         <div style="width:{{$files[$index][form.options.progressKey]}}%" ng-bind="$files[$index][form.options.progressKey] + '%'"></div>
     </span>
-    <div ng-show="f" class="icon-activities_icon_close file-del"
+    <div ng-show="f" class="icon icon-activities_icon_close file-del"
          ng-click="form.options.deleteFn($$value$$, f)"></div>
   </div>
   <a ng-if="form.options.maxNum ? form.options.maxNum > $$value$$.length : true" ngf-multiple="true" class="btn btn-success uploadfilesbuttom" ngf-select ngf-change="form.options.uploadPics($files, form.options, $$value$$)"
