@@ -1,5 +1,5 @@
 <div ng-class="form.htmlClass" style="clear: both">
-    <div class="ng-table-toolbar" ng-if="!form.hideTopToggle">
+    <div ng-attr-id="{{ form.options.id }}-toolbar" class="ng-table-toolbar" ng-if="!form.hideTopToggle">
         <div id="toolbar_btnoption_list" class="pull-left">
             <div class="btnlist-inner">
                 <button ng-repeat="btn in form.toolbar" class="btn btn-default" ng-class="btn.htmlClass" 
@@ -10,6 +10,7 @@
                 </button>
             </div>
         </div>
+        <div class="pull-right"></div>
     </div>
     <table ng-attr-id="{{ form.options.id }}" bs-table-control="form.options"></table>
 </div>
