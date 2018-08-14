@@ -52,7 +52,7 @@
         },
         f3 : {
           title : '日期',
-          type : 'string'
+          type: "date"
         },
         f4 : {
           title : '搜索',
@@ -124,21 +124,30 @@
           }
         ]
       },
+      // {
+      //   key : 'f3',
+      //   placeholder : '....',
+      //   type : "date-range",
+      //   fieldAddonRight : {
+      //     htmlClass : 'fa fa-calendar'
+      //   },
+      //   //templateUrl: '/templates/daterange.html',
+      //   enabletimepicker : MosEnum.momentTimepicker,
+      //   //singleDatePicker: true,
+      //   //minDate:moment('1970-1-1','YYYY-MM-DD'),
+      //   //maxDate:moment(),
+      //   //limit: "30 days",
+      //   locale : MosEnum.momentLocales,
+      //   ranges : MosEnum.momentRanges
+      // },
       {
-        key : 'f3',
-        placeholder : '....',
-        type : "date-range",
-        fieldAddonRight : {
-          htmlClass : 'fa fa-calendar'
+        "key": "f3",
+        "dateOptions": {
+          dateFormat: "yyyy",
+          minView: 2,
+          startView: 2
         },
-        //templateUrl: '/templates/daterange.html',
-        enabletimepicker : MosEnum.momentTimepicker,
-        //singleDatePicker: true,
-        //minDate:moment('1970-1-1','YYYY-MM-DD'),
-        //maxDate:moment(),
-        //limit: "30 days",
-        locale : MosEnum.momentLocales,
-        ranges : MosEnum.momentRanges
+        type: "datepicker"
       },
       {
         key : 'f4',
