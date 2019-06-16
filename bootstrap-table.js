@@ -208,6 +208,28 @@ angular.module('schemaForm').config(
           'mos-textarea',
           base + 'mos-textarea.html'
       );
+	  
+	//mosselect
+    var mosselect = function(name, schema, options) {
+      if (schema.format === 'mos-select') {
+        var f = schemaFormProvider.stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'mos-select';
+        options.lookup[sfPathProvider.stringify(options.path)] = f;
+        return f;
+      }
+    };
+    schemaFormProvider.defaults.string.unshift(mosselect);
+    schemaFormDecoratorsProvider.addMapping(
+      'bootstrapDecorator',
+      'mos-select',
+      base + 'mos-select.html'
+    );
+    schemaFormDecoratorsProvider.createDirective(
+      'mos-select',
+      base + 'mos-select.html'
+    );
+	
     //MOSSelect2
     var mosselect2 = function(name, schema, options) {
       if (schema.format === 'mos-select2') {
@@ -659,6 +681,7 @@ angular.module('schemaForm').config(
       'mos-color' : base + 'mos-color.html',//颜色选择组件
       'mos-textarea' : base + 'mos-textarea.html',//对许框文字输入选择组件
       'mos-commit-info' : base + 'mos-commit-info.html',//自定义提交资料
+      'mos-select' : base + 'mos-select.html',//选择组件
       'mos-select2' : base + 'mos-select2.html',//选择组件v2
       'mos-multiselect2' : base + 'mos-multiselect2.html',//多选组件v2
       'mos-treeselect2' : base + 'mos-treeselect2.html',//选择树形组件v2
